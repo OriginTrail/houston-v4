@@ -1,0 +1,339 @@
+[
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "error",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "moveTheBlock",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "a",
+				"type": "uint256"
+			}
+		],
+		"name": "PreIPosle",
+		"type": "event"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "message",
+				"type": "bytes32"
+			},
+			{
+				"name": "signature",
+				"type": "bytes"
+			}
+		],
+		"name": "ecrecovery",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "offer_hash",
+				"type": "bytes32"
+			},
+			{
+				"name": "DH_wallet",
+				"type": "address"
+			},
+			{
+				"name": "DH_node_id",
+				"type": "bytes32"
+			}
+		],
+		"name": "escrowHash",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getBlockNumber",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getBlockTimestamp",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "holderIdentity0",
+				"type": "address"
+			},
+			{
+				"name": "holderIdentity1",
+				"type": "address"
+			},
+			{
+				"name": "holderIdentity2",
+				"type": "address"
+			},
+			{
+				"name": "shift",
+				"type": "uint256"
+			}
+		],
+		"name": "getSolution",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "a",
+				"type": "bytes32"
+			},
+			{
+				"name": "b",
+				"type": "bytes32"
+			}
+		],
+		"name": "keccak2hashes",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "a",
+				"type": "address"
+			}
+		],
+		"name": "keccakAddress",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "a",
+				"type": "address"
+			},
+			{
+				"name": "b",
+				"type": "address"
+			},
+			{
+				"name": "c",
+				"type": "address"
+			}
+		],
+		"name": "keccakAddressAddressAddress",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "adr",
+				"type": "address"
+			},
+			{
+				"name": "byt",
+				"type": "bytes32"
+			}
+		],
+		"name": "keccakAddressBytes",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "a",
+				"type": "bytes32"
+			},
+			{
+				"name": "b",
+				"type": "address"
+			}
+		],
+		"name": "keccakBytesAddress",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "a",
+				"type": "bytes32"
+			},
+			{
+				"name": "b",
+				"type": "uint256"
+			}
+		],
+		"name": "keccakIndex",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "adr",
+				"type": "address"
+			},
+			{
+				"name": "nod_id",
+				"type": "bytes32"
+			},
+			{
+				"name": "data_id",
+				"type": "uint256"
+			}
+		],
+		"name": "keccakOffer",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "keccakSender",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "a",
+				"type": "string"
+			}
+		],
+		"name": "keccakString",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "pure",
+		"type": "function"
+	}
+]

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>30E6BC16-DDF1-4879-BF7A-6D74F3061287</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M11.4999745,17.2957741 L11.4999745,1.93018932 L12.5000255,1.93018932 L12.5000255,17.2957741 L18.7178573,11.0776026 L19.4250002,11.7847841 L12,19.21019 L4.57499981,11.7847841 L5.28214268,11.0776026 L11.4999745,17.2957741 Z M4.57499981,21.0698107 L19.4250002,21.0698107 L19.4250002,22.0698107 L4.57499981,22.0698107 L4.57499981,21.0698107 Z" id="path-1"></path>
+    </defs>
+    <g id="showcase" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="thin_icons-white" transform="translate(-380.000000, -374.000000)">
+            <rect fill="#090932" x="0" y="0" width="1440" height="1440"></rect>
+            <g id="Icon-Thin/id=&quot;ic_download_white&quot;" transform="translate(380.803305, 374.183724)">
+                <rect id="blind_pixel" fill-opacity="0.01" fill="#FFFFFF" fill-rule="evenodd" x="0" y="0" width="1" height="1"></rect>
+                <rect id="blind_pixel" fill-opacity="0.01" fill="#FFFFFF" fill-rule="evenodd" x="23" y="23" width="1" height="1"></rect>
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>325E1325-8709-4212-8BF3-DBFCFCC08BE5</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <polygon id="path-1" points="19.863961 11.5 13.6464466 5.28248558 14.3535534 4.5753788 21.7781746 12 14.3535534 19.4246212 13.6464466 18.7175144 19.863961 12.5 1.5 12.5 1.5 11.5"></polygon>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icon-Thin/id=&quot;ic_arrow_forward&quot;">
+            <rect id="Bounding-Box" x="0" y="0" width="24" height="24"></rect>
+            <rect id="blind_pixel" fill-opacity="0.01" fill="#FFFFFF" x="0" y="0" width="1" height="1"></rect>
+            <rect id="blind_pixel" fill-opacity="0.01" fill="#FFFFFF" x="23" y="23" width="1" height="1"></rect>
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Mask" fill="#fffff" fill-rule="nonzero" xlink:href="#path-1"></use>
+            <g id="Mixin/Fill/#navy_blue" mask="url(#mask-2)" fill="#ffffff">
+                <rect id="#primary" x="0" y="0" width="24" height="24"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
