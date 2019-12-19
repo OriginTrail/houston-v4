@@ -53,6 +53,12 @@ body {
     @media (max-width: 450px) {
       padding: 20px;
     }
+    .network-wrapper {
+      width: 100%;
+      .el-select {
+        width: 100%;
+      }
+    }
       .landing-page-button{
         margin-top: 25px;
         width: 100%;

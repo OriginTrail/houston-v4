@@ -21,31 +21,9 @@ window.Eth = require('ethjs');
 
 window.EventBus = new Vue();
 
-window.profileAbi = profileAbi.default;
-window.erc725Abi = erc725Abi.default;
-window.tokenAbi = tokenAbi.default;
-window.profileStorageAbi = profileStorageAbi.default;
-window.keccakAbi = keccakAbi.default;
-
-window.hubAddress = '0xE92dCa9Fe0F079D582a68ca8C55fb7BDa2558F2c';
-window.keccakAddress = '0xfd010324268fec8868c663ce2cde2de8cb7d832a';
-
 
 Vue.use(ElementUI, { locale });
-if (typeof web3 !== 'undefined' && window.screen.width > 770) {
-  // eslint-disable-next-line
-    window.eth = new window.Eth(web3.currentProvider);
-} else if (window.screen.width <= 770) {
-  window.eth = new window.Eth(new window.Eth.HttpProvider('https://mainnet.infura.io/v3/f8c3858f892d4199840f5354cc954713'));
-} else {
-  alert('Please install Metamask');
-}
-try {
-  window.hub = window.eth.contract(hubAbi.default).at(window.hubAddress);
-  window.ethereum.enable();
-} catch (err) {
-  console.log(err);
-}
+
 
 Vue.use(new VueSocketIO({
   debug: true,
