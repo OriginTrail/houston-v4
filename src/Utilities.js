@@ -73,12 +73,17 @@ export default {
   },
 
   connectToMainnet() {
-    window.hubAddress = '0xE92dCa9Fe0F079D582a68ca8C55fb7BDa211111';
+    window.hubAddress = '0xa287d7134fb40bef071c932286bd2cd01efccf30';
+    // TODO: Get mainnet Keccak
     window.keccakAddress = '0xfd010324268fec8868c663ce2cde2de8cb7d832a';
 
     if (typeof web3 !== 'undefined' && window.screen.width > 770) {
-      // eslint-disable-next-line
-      window.eth = new window.Eth(web3.currentProvider);
+      try {
+        // eslint-disable-next-line
+        window.eth = new window.Eth(web3.currentProvider);
+      } catch (e) {
+        alert('Something is wrong with your connection, please double-check provided data');
+      }
     } else if (window.screen.width <= 770) {
       window.eth = new window.Eth(new window.Eth.HttpProvider('https://mainnet.infura.io/v3/f8c3858f892d4199840f5354cc954713'));
     } else {
@@ -89,6 +94,7 @@ export default {
       window.ethereum.enable();
     } catch (err) {
       console.log(err);
+      alert('Something is wrong with your connection, please double-check provided data');
     }
   },
 
@@ -98,7 +104,12 @@ export default {
 
     if (typeof web3 !== 'undefined' && window.screen.width > 770) {
       // eslint-disable-next-line
-      window.eth = new window.Eth(web3.currentProvider);
+
+      try {
+        window.eth = new window.Eth(web3.currentProvider);
+      } catch (e) {
+        alert('Something is wrong with your connection, please double-check provided data');
+      }
     } else if (window.screen.width <= 770) {
       window.eth = new window.Eth(new window.Eth.HttpProvider('https://mainnet.infura.io/v3/f8c3858f892d4199840f5354cc954713'));
     } else {
@@ -109,6 +120,8 @@ export default {
       window.ethereum.enable();
     } catch (err) {
       console.log(err);
+
+      alert('Something is wrong with your connection, please double-check provided data');
     }
   },
 };

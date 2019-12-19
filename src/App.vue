@@ -300,8 +300,6 @@ export default {
           .then((result) => {
             this.profile_storage_address = result[0];
           });
-
-
       } else {
         Utilities.connectToTestnet();
 
