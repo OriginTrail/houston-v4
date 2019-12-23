@@ -1,3 +1,0 @@
-- 多语言翻译
-  - [:cn: 中文](/zh-cn/)
-  - [:uk: English](/en-us/)
