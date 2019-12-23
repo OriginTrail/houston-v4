@@ -6,9 +6,7 @@
 - Add/remove new management wallets and operational wallets from your profile
 - *Deposit ETH* to your Operational wallet
 - *Deposit TRAC tokens* to your profile
-- *Withdraw* earned token from your profile to your Management wallet
-
-This is the Open Source project and you are welcome to contribute. Furthermore, you may use it from our website [https://node-profile.origintrail.io/](https://node-profile.origintrail.io/) or you can download the project and run it locally.  
+- *Withdraw* earned token from your profile to your Management wallet 
 
 ## Project setup
 ```
