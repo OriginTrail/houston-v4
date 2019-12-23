@@ -1,10 +1,7 @@
-# OriginTrail Management Interface
-
-This is the OriginTrail web interface to manage your node tokens and ether as well as to manage wallets.
-
-[https://node-profile.origintrail.io/](https://node-profile.origintrail.io/)
+# HOUSTON v4
 
 ## Features
+- Setup the node configuration and pricing
 - Display all balances on *Management wallet* and *Operational wallet* as well as your *profile* (ERC725 identity)
 - Add/remove new management wallets and operational wallets from your profile
 - *Deposit ETH* to your Operational wallet
