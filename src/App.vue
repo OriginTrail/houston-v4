@@ -20,6 +20,7 @@
                             :token-address="token_contract"
                             :node-id="node_id"
                             :configData="configData"
+                            :systemData="systemData"
                             :management_wallet_input="management_wallet_input"></my-account>
             </el-container>
 
@@ -69,10 +70,12 @@
             </div>
 
             <el-container v-else-if="submitted && activeIndex2 === '3'">
-                <node-config :node-config="configData" :system="systemData" :node-id="node_id" v-if="showConfig"></node-config>
+                <node-config :node-config="configData" :system="systemData" :node-id="node_id"
+                             v-if="showConfig"></node-config>
             </el-container>
             <el-container v-else-if="submitted && activeIndex2 === '4'">
-                <node-pricing :node-config="configData" :system="systemData" :node-id="node_id" v-if="showConfig"></node-pricing>
+                <node-pricing :node-config="configData" :system="systemData" :node-id="node_id"
+                              v-if="showConfig"></node-pricing>
             </el-container>
             <el-container v-else-if="submitted && activeIndex2 === '5'">
                 <jobs :submitted="submitted"></jobs>
@@ -96,9 +99,22 @@
                         <h1>Houston App</h1>
                         <div class="landing-page-inner-wrapper">
                             <el-form>
+                                <div class="network-wrapper">
+                                    <el-select v-model="selected_network" placeholder="Please select the network">
+                                        <el-option
+                                                v-for="item in network_options"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </div>
+
+
                                 <el-form-item label="Please enter your Node address"
                                 >
                                     <el-input
+                                            :disabled="selected_network === ''"
                                             type="textarea"
                                             :autosize="{ minRows: 1, maxRows: 2}"
                                             resize="none"
@@ -107,6 +123,7 @@
                                 <el-form-item label="Please enter your Houston password"
                                 >
                                     <el-input
+                                            :disabled="selected_network === ''"
                                             type="textarea"
                                             :autosize="{ minRows: 1, maxRows: 2}"
                                             resize="none"
@@ -115,6 +132,7 @@
                                 <el-form-item label="Please enter your ERC725 identity"
                                 >
                                     <el-input
+                                            :disabled="selected_network === ''"
                                             type="textarea"
                                             :autosize="{ minRows: 1, maxRows: 2}"
                                             resize="none"
@@ -123,6 +141,7 @@
                                 <el-form-item label="Please enter your operational wallet address"
                                 >
                                     <el-input
+                                            :disabled="selected_network === ''"
                                             type="textarea"
                                             :autosize="{ minRows: 1, maxRows: 2}"
                                             resize="none"
@@ -134,6 +153,7 @@
 
                                 >
                                     <el-input
+                                            :disabled="selected_network === ''"
                                             maxlength="42"
                                             minlength="42"
                                             type="textarea"
@@ -141,7 +161,7 @@
                                             resize="none"
                                             v-model="management_wallet_input"></el-input>
                                 </el-form-item>
-                                <el-button class="landing-page-button" @click="submitIdentity">Submit</el-button>
+                                <el-button class="landing-page-button" @click="submitIdentity" :disabled="selected_network === ''">Submit</el-button>
                             </el-form>
                         </div>
                     </div>
@@ -162,7 +182,7 @@ import NodePricing from './components/NodePricing.vue';
 import Jobs from './components/Jobs.vue';
 import NodeConfig from './components/NodeConfig.vue';
 import ManagementHeader from './components/TokenManagementHeader.vue';
-
+import Utilities from './Utilities';
 
 export default {
   name: 'app',
@@ -183,14 +203,34 @@ export default {
       houston_pass: '',
       rules: {
         operational_wallet: [
-          { required: true, message: 'Please input your operational wallet', trigger: 'blur' },
-          { max: 42, message: 'Your wallet should not be more than 42 characters' },
-          { min: 42, message: 'Your wallet should be at least 42 characters long' },
+          {
+            required: true,
+            message: 'Please input your operational wallet',
+            trigger: 'blur',
+          },
+          {
+            max: 42,
+            message: 'Your wallet should not be more than 42 characters',
+          },
+          {
+            min: 42,
+            message: 'Your wallet should be at least 42 characters long',
+          },
         ],
         erc_identity: [
-          { required: true, message: 'Please input your ERC-Identity', trigger: 'blur' },
-          { max: 42, message: 'Your ERC-Identity should not be more than 42 characters' },
-          { min: 42, message: 'Your ERC-Identity should be at least 42 characters long' },
+          {
+            required: true,
+            message: 'Please input your ERC-Identity',
+            trigger: 'blur',
+          },
+          {
+            max: 42,
+            message: 'Your ERC-Identity should not be more than 42 characters',
+          },
+          {
+            min: 42,
+            message: 'Your ERC-Identity should be at least 42 characters long',
+          },
         ],
       },
       showNodeProfile: false,
@@ -202,6 +242,14 @@ export default {
       systemData: {},
       showConfig: false,
       node_id: '',
+      network_options: [{
+        value: 'mainnet',
+        label: 'Mainnet',
+      }, {
+        value: 'testnet',
+        label: 'Testnet',
+      }],
+      selected_network: 'testnet',
     };
   },
   mounted() {
@@ -221,17 +269,9 @@ export default {
       this.operational_wallet = localStorage.getItem('operational_wallet');
     }
 
-    window.hub.tokenAddress().then((result) => {
-      this.token_contract = result[0];
-    });
-
-    window.hub.getContractAddress('Profile').then((result) => {
-      this.profile_address = result[0];
-    });
-
-    window.hub.getContractAddress('ProfileStorage').then((result) => {
-      this.profile_storage_address = result[0];
-    });
+    if (localStorage.getItem('selected_network') !== null) {
+      this.selected_network = localStorage.getItem('selected_network');
+    }
 
     window.EventBus.$on('loading', (msg) => {
       this.loading = true;
@@ -244,7 +284,6 @@ export default {
     if (window.screen.width <= 770) {
       this.mobileTrue = true;
     }
-
   },
   methods: {
     submitIdentity() {
@@ -252,6 +291,43 @@ export default {
       localStorage.setItem('operational_wallet', this.operational_wallet);
       localStorage.setItem('houston_pass', this.houston_pass);
       localStorage.setItem('node_address', this.node_address);
+      localStorage.setItem('selected_network', this.selected_network);
+
+      if (this.selected_network === 'mainnet') {
+        Utilities.connectToMainnet();
+
+        window.hub.tokenAddress()
+          .then((result) => {
+            this.token_contract = result[0];
+          });
+
+        window.hub.getContractAddress('Profile')
+          .then((result) => {
+            this.profile_address = result[0];
+          });
+
+        window.hub.getContractAddress('ProfileStorage')
+          .then((result) => {
+            this.profile_storage_address = result[0];
+          });
+      } else {
+        Utilities.connectToTestnet();
+
+        window.hub.tokenAddress()
+          .then((result) => {
+            this.token_contract = result[0];
+          });
+
+        window.hub.getContractAddress('Profile')
+          .then((result) => {
+            this.profile_address = result[0];
+          });
+
+        window.hub.getContractAddress('ProfileStorage')
+          .then((result) => {
+            this.profile_storage_address = result[0];
+          });
+      }
 
       this.submitted = 1;
       this.activeIndex2 = '1';
@@ -264,46 +340,50 @@ export default {
     handleSelect(key, keyPath) {
 
       /* eslint-disable */
-      this.activeIndex2 = key;
-      if (key == 1) {
-        this.showMyAccount = true;
-      } else if (key == 2) {
-        this.showNodeProfile = true;
-      } else if (key == 3) {
-        this.showNodeConfig = true;
-      } else if (key == 4) {
-        this.showNodePricing = true;
-      } else if (key == 5) {
-        this.showJobs = true;
-      }
-    },
+        this.activeIndex2 = key;
+        if (key == 1) {
+          this.showMyAccount = true;
+        } else if (key == 2) {
+          this.showNodeProfile = true;
+        } else if (key == 3) {
+          this.showNodeConfig = true;
+        } else if (key == 4) {
+          this.showNodePricing = true;
+        } else if (key == 5) {
+          this.showJobs = true;
+        }
+      },
 
-  },
-  sockets: {
-    connect() {
-      console.log('Socket connected. Checking for version!');
-      this.$socket.emit('get-balance');
-      this.$socket.emit('get-balance');
-      this.$socket.emit('get-node-info');
     },
-    config(val) {
-      console.log(val, 'config');
-      this.node_id = val.identity;
-      this.configData = val;
-      window.EventBus.$emit('config',val);
-      this.showConfig = true;
+    sockets: {
+      connect() {
+        console.log('Socket connected. Checking for version!');
+        this.$socket.emit('get-balance');
+        this.$socket.emit('get-balance');
+        this.$socket.emit('get-node-info');
+      },
+      config(val) {
+        console.log(val, 'config');
+        this.node_id = val.identity;
+        this.configData = val;
+        this.showConfig = true;
+        window.EventBus.$emit('config',val);
         window.EventBus.$emit('node_id', this.node_id);
-    },
-    system(val) {
+
+      },
+      system(val) {
         this.systemData = val;
-      console.log(val, 'system');
-    },
-    balance(val) {
-      console.log(val, 'balance');
-    },
-    nodeInfo(val) {
-      console.log(val, 'node info');
-    },
+        window.network_type_constant = val.info.environment;
+        window.EventBus.$emit('system-data', val);
+
+        console.log(val, 'system');
+      },
+      balance(val) {
+        console.log(val, 'balance');
+      },
+      nodeInfo(val) {
+        console.log(val, 'node info');
+      },
 
   },
   components: {

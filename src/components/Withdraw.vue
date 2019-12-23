@@ -26,8 +26,8 @@ The maximum amount of TRAC safe to withdraw is shown in the left sidebar. Keep i
         <p class="label-p">Withdrawing to the following management wallet:</p>
         <el-input v-model="wallet" :disabled="true"></el-input>
       </el-form-item>
-      <el-button class="houston-btn" style="width: 47%" @click="startTokenWithdrawal">Tokens Withdrawal</el-button>
-      <el-button class="houston-white-btn " style="width: 47%" @click="withdrawTokens">Withdraw Tokens</el-button>
+      <el-button class="houston-btn" style="width: 47%" @click="startTokenWithdrawal">START WITHDRAWAL</el-button>
+      <el-button class="houston-white-btn " style="width: 47%" @click="withdrawTokens">FIMNISH WITHDRAWAL</el-button>
     </el-form>
   </div>
 </template>

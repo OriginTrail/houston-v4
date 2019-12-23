@@ -20,10 +20,7 @@
         <el-input-number v-model="amount" :precision="3" :step="0.01" :min="0"></el-input-number> <span class="which-token">TRAC</span>
       </el-form-item>
       <el-col :span="24" class="second-radius">
-      <div class="el-col field">
-        <p class="label-p">Depositing to the Following ODN Node Profile:</p>
-        <p class="op-wallet">SMART CONTRACT ADDRESS SHOULD BE HERE</p>
-      </div>
+
       </el-col>
       <el-button class="houston-btn block" @click="increaseApproval">DEPOSIT TRAC</el-button>
     </el-form>

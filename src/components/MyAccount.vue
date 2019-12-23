@@ -17,7 +17,7 @@
                         </el-col>
                         <el-col :span="18" class="second-radius">
                             <div class="el-col field">
-                               <p> {{ configNetworkId | networkIdFilter }}</p>
+                               <p> {{ network_type }}</p>
                             </div>
                         </el-col>
                     </div>
@@ -155,7 +155,8 @@ export default {
     'management_wallet_input',
     'nodeId',
     'submitted',
-    'configData'
+    'configData',
+    'systemData'
   ],
   data() {
     return {
@@ -186,7 +187,7 @@ export default {
         },
       },
       web3: {},
-      configNetworkId:'',
+      network_type:'',
       ow_eth_balance: 0,
       mw_eth_balance: 0,
       mw_trac_balance: 0,
@@ -214,8 +215,14 @@ export default {
       this.getAllBalances();
       this.$socket.emit('get-total-payouts');
       this.$socket.emit('get-profile');
-      console.log('pozvana u my account');
+      console.log(this.systemData, 'pozvana u my account');
     }
+
+    this.network_type = window.network_type_constant;
+
+    window.EventBus.$on('system-data', (data) => {
+      this.network_type = data.info.environment;
+    });
 
 
     window.EventBus.$on('management_wallet_changed', (data) => {
@@ -238,6 +245,9 @@ export default {
   //
   // },
   watch: {
+    network_type(newVal, oldVal) {
+
+    },
     locked_trac(newVal, oldVal) {
       if (newVal.toString() !== oldVal.toString() && oldVal !== 0) {
         this.locked_trac_changed = true;
@@ -422,14 +432,6 @@ export default {
       }
 
       return value;
-    },
-    networkIdFilter(value){
-      if(value == 'rinkeby')
-      {
-        return 'Testnet';
-      }else{
-        return 'Mainnet';
-      }
     },
     toTrac(val) {
       const am = new window.Eth.BN(val);

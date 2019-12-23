@@ -7,8 +7,6 @@
     ]">
       <el-col>
         <h2 class="balance-headline">ODN Node Profile</h2>
-
-        <p class="address">CONTRACT ADDRESS GOES HERE</p>
       </el-col>
       <el-col :span="12" class="align-left left-text">TOTAL</el-col>
       <el-col :span="12" class="result">{{total_trac | toTrac}} TRAC</el-col>
@@ -270,6 +268,8 @@ export default {
         .at(this.profileAddress);
 
       profileStorageContract.getStake(this.erc725).then((result) => {
+        console.log(result, 'rezultat get Stake');
+
         this.total_trac = new window.Eth.BN(result[0]);
       });
 
