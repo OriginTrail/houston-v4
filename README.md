@@ -29,7 +29,7 @@
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+npm run houston
 ```
 
 ### Compiles and minifies for production
