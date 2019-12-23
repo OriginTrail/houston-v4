@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import Vue from 'vue';
 import VueSocketIO from 'vue-socket.io';
 import { DataTables, DataTablesServer } from 'vue-data-tables';

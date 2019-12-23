@@ -31,6 +31,7 @@
   </div>
 </template>
 <script>
+  /* eslint-disable */
 export default {
   props: ['operationalWallet'],
   data() {

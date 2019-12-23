@@ -184,6 +184,8 @@ import NodeConfig from './components/NodeConfig.vue';
 import ManagementHeader from './components/TokenManagementHeader.vue';
 import Utilities from './Utilities';
 
+/* eslint-disable */
+
 export default {
   name: 'app',
   data() {
@@ -338,7 +340,6 @@ export default {
       window.EventBus.$emit('get-balances-event');
     },
     handleSelect(key, keyPath) {
-
       /* eslint-disable */
         this.activeIndex2 = key;
         if (key == 1) {

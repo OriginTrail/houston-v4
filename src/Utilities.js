@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as profileAbi from './abi/profile.json';
 import * as erc725Abi from './abi/erc725.json';
 import * as tokenAbi from './abi/token.json';

@@ -21,14 +21,20 @@ The maximum amount of TRAC safe to withdraw is shown in the left sidebar. Keep i
         <el-input v-model="wallet" :disabled="true"></el-input>
       </el-form-item>
       <el-button class="houston-btn" style="width: 47%" @click="startTokenWithdrawal">Start Withdrawal</el-button>
-      <el-button class="houston-white-btn " style="width: 47%;" @click="withdrawTokens">Finish Withdrawal</el-button>
+      <el-button class="houston-white-btn " style="width: 47%;"
+                 @click="withdrawTokens">Finish Withdrawal</el-button>
     </el-form>
   </div>
 </template>
 <script>
+/* eslint-disable */
+
+/* eslint-disable */
+
 export default {
   props: ['profileAddress', 'erc725'],
   mounted() {
+    /* eslint-disable */
     window.eth.accounts().then((result) => {
       // eslint-disable-next-line
       this.wallet = result[0];
@@ -95,6 +101,8 @@ export default {
     },
   },
 };
+
+/* eslint-disable */
 </script>
 
 <style scoped>
