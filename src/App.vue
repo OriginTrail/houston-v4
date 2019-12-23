@@ -439,6 +439,7 @@ export default {
         border: solid 1px var(--grey_200A);
         text-align: left;
         border: 1px solid #dfdfdf;
+        min-height: 456px;
     }
 
     .panel-form {

@@ -11,12 +11,6 @@ The maximum amount of TRAC safe to withdraw is shown in the left sidebar. Keep i
       <i class="el-icon-info" slot="reference"></i>
     </el-popover></h1>
     <span>This will withdraw TRAC from your ODN node profile.</span>
-    <el-col :span="24" class="second-radius">
-      <div class="el-col field">
-        <p class="label-p">Depositing to the Following Operational Wallet:</p>
-        <p class="op-wallet">SMART CONTRACT ADDRESS SHOULD BE HERE</p>
-      </div>
-    </el-col>
     <el-form>
       <p class="label-p">Amount to Withdraw:</p>
       <el-form-item>
@@ -26,8 +20,8 @@ The maximum amount of TRAC safe to withdraw is shown in the left sidebar. Keep i
         <p class="label-p">Withdrawing to the following management wallet:</p>
         <el-input v-model="wallet" :disabled="true"></el-input>
       </el-form-item>
-      <el-button class="houston-btn" style="width: 47%" @click="startTokenWithdrawal">START WITHDRAWAL</el-button>
-      <el-button class="houston-white-btn " style="width: 47%" @click="withdrawTokens">FIMNISH WITHDRAWAL</el-button>
+      <el-button class="houston-btn" style="width: 47%" @click="startTokenWithdrawal">Start Withdrawal</el-button>
+      <el-button class="houston-white-btn " style="width: 47%;" @click="withdrawTokens">Finish Withdrawal</el-button>
     </el-form>
   </div>
 </template>
