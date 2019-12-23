@@ -39,8 +39,7 @@
                                     Data Holder Price Factor (λ)
                                 </h3>
                                 <p class="label">Value</p>
-                                <el-input-number class="value-input" v-model="config.blockchain.price_factor_dh"
-                                                 :disabled="config.blockchain.price_factor_dc > 0"
+                                <el-input-number class="value-input" v-model="config.blockchain.dh_price_factor"
                                                  @change="handleChangeDh" :min="0"></el-input-number>
                                 <div class="display-block text-left">
                                     <el-button type="primary" @click="onSubmit" class="houston-btn"
@@ -60,10 +59,10 @@
                             </el-popover>-->
                             </div>
                         </el-col>
-                        <el-col :span="12" class="text-left add-left-padding">
+                        <el-col :span="12" class="text-left " style="padding-left: 20px;">
                             <h3 class="card-headline">
-                                The estimated amount of TRAC your node would require as a DH and a DC for jobs based on
-                                current Lambda:
+                                The estimated amount of TRAC your node would ask for as a DH node for jobs based on
+                                currently set DH Lambda:
                             </h3>
                             <ul>
                                 <li>A dataset of 0.1 MB with a 6-month lifespan: <span class="price-in-trac">{{ pricing_01mb_180days }}</span>
@@ -109,8 +108,7 @@
                                     Data Creator Price Factor (λ)
                                 </h3>
                                 <p class="label">Value</p>
-                                <el-input-number class="value-input" v-model="config.blockchain.price_factor_dc"
-                                                 :disabled="config.blockchain.price_factor_dh > 0"
+                                <el-input-number class="value-input" v-model="config.blockchain.dc_price_factor"
                                                  @change="handleChangeDc" :min="0"></el-input-number>
                                 <div class="display-block text-left">
                                     <el-button type="primary" @click="onSubmit" class="houston-btn"
@@ -130,7 +128,7 @@
                             </el-popover>-->
                             </div>
                         </el-col>
-                        <el-col :span="12" class="text-left add-left-padding">
+                        <el-col :span="12" class="text-left" style="padding-left: 20px;">
                             <h3 class="card-headline">
                                 The estimated amount of TRAC your node would require as a DH and a DC for jobs based on
                                 current Lambda:
@@ -162,200 +160,194 @@
 </template>
 
 <script>
-  export default {
-    props: ['nodeConfig', 'system', 'nodeId'],
-    name: 'NodePricing',
-    data() {
-      return {
-        updateDcButton:false,
-        updateDhButton:false,
-        price_factor: 1,
-        pricing: 1,
-        loading: true,
-        ident: '',
-        original_config: null,
-        network: '',
-        config: {
-          identity: '',
-          node_wallet: '',
-          node_private_key: '',
-          node_rpc_ip: '',
-          node_port: '',
-          request_timeout: '',
-          ssl_keypath: '',
-          ssl_certificate_path: '',
-          verbose_logging: '',
-          control_port_enabled: '',
-          control_port: '',
-          control_sock_enabled: '',
-          control_sock: '',
-          onion_enabled: '',
-          test_network: '',
-          ssl_authority_paths: '',
-          network_bootstrap_nodes: '',
-          solve_hashes: '',
-          remote_access_whitelist: '',
-          node_rpc_port: '',
-          send_logs_to_origintrail: '',
-          max_token_amount_per_dh: '',
-          remote_control_enabled: true,
-          node_remote_control_port: '',
-          dh_maximum_dataset_filesize_in_mb: '',
-          network: {
-            hostname: '',
-            id: '',
-            bootstraps: [''],
-            remoteWhitelist: [''],
-            solutionDifficulty: '',
-            identityDifficulty: '',
-          },
-          blockchain: {
-            blockchain_title: '',
-            network_id: '',
-            gas_limit: '',
-            gas_price: '',
-            hub_contract_address: '',
-            rpc_server_url: '',
-            plugins: [''],
-            trac_price_in_eth: '',
-            price_factor_dh: '',
-            price_factor_dc: ''
-          },
-          dc_holding_time_in_minutes: '',
-          dc_token_amount_per_holder: '',
-          dc_litigation_interval_in_minutes: '',
-          dh_max_holding_time_in_minutes: '',
-          dh_min_token_price: '',
-          dh_min_litigation_interval_in_minutes: '',
-          dc_choose_time: 600000,
-          requireApproval: false,
-          litigationEnabled: true,
-          commandExecutorVerboseLoggingEnabled: false,
+export default {
+  props: ['nodeConfig', 'system', 'nodeId'],
+  name: 'NodePricing',
+  data() {
+    return {
+      updateDcButton: false,
+      updateDhButton: false,
+      price_factor: 1,
+      pricing: 1,
+      loading: true,
+      ident: '',
+      original_config: null,
+      network: '',
+      config: {
+        identity: '',
+        node_wallet: '',
+        node_private_key: '',
+        node_rpc_ip: '',
+        node_port: '',
+        request_timeout: '',
+        ssl_keypath: '',
+        ssl_certificate_path: '',
+        verbose_logging: '',
+        control_port_enabled: '',
+        control_port: '',
+        control_sock_enabled: '',
+        control_sock: '',
+        onion_enabled: '',
+        test_network: '',
+        ssl_authority_paths: '',
+        network_bootstrap_nodes: '',
+        solve_hashes: '',
+        remote_access_whitelist: '',
+        node_rpc_port: '',
+        send_logs_to_origintrail: '',
+        max_token_amount_per_dh: '',
+        remote_control_enabled: true,
+        node_remote_control_port: '',
+        dh_maximum_dataset_filesize_in_mb: '',
+        network: {
+          hostname: '',
+          id: '',
+          bootstraps: [''],
+          remoteWhitelist: [''],
+          solutionDifficulty: '',
+          identityDifficulty: '',
         },
-        node_id: '',
-        pricing_1mb_180days : 0,
-        pricing_10mb_180days :0,
-        pricing_10mb_730days :0
-      };
-    },
-    mounted() {
-      this.config = this.nodeConfig;
-      this.systemData = this.system;
+        blockchain: {
+          blockchain_title: '',
+          network_id: '',
+          gas_limit: '',
+          gas_price: '',
+          hub_contract_address: '',
+          rpc_server_url: '',
+          plugins: [''],
+          trac_price_in_eth: '',
+          dc_price_factor: '',
+          dh_price_factor: '',
+        },
+        dc_holding_time_in_minutes: '',
+        dc_token_amount_per_holder: '',
+        dc_litigation_interval_in_minutes: '',
+        dh_max_holding_time_in_minutes: '',
+        dh_min_token_price: '',
+        dh_min_litigation_interval_in_minutes: '',
+        dc_choose_time: 600000,
+        requireApproval: false,
+        litigationEnabled: true,
+        commandExecutorVerboseLoggingEnabled: false,
+      },
+      node_id: '',
+      pricing_01mb_180days: 0,
+      pricing_1mb_180days: 0,
+      pricing_10mb_180days: 0,
+      pricing_10mb_730days: 0,
+    };
+  },
+  mounted() {
+    this.config = this.nodeConfig;
+    this.systemData = this.system;
+    this.handleChangeDc(this.config.blockchain.dc_price_factor);
+    this.handleChangeDh(this.config.blockchain.dh_price_factor);
 
+    console.log(this.config);
 
-      switch (this.systemData.info.environment.toLowerCase()) {
-        case 'mariner':
-          this.network = 'Mainnet';
-          break;
-        case 'production':
-          this.network = 'Testnet';
-          break;
-        default:
-          this.network = 'Mainnet';
-      }
-
-      window.EventBus.$on('node_id', (data) => {
-        this.node_id = data;
-      });
-    },
-    sockets: {
-      updateComplete() {
-        console.log('updated');
-      },
-    },
-    methods: {
-      onSubmit() {
-        // Fix types.
-        this.config.node_port = Number(this.config.node_port);
-        this.config.node_rpc_port = Number(this.config.node_rpc_port);
-        this.config.node_remote_control_port = Number(this.config.node_remote_control_port);
-        this.config.request_timeout = Number(this.config.request_timeout);
-        this.config.dc_holding_time_in_minutes = Number(this.config.dc_holding_time_in_minutes);
-        /* this.config.dc_litigation_interval_in_minutes = Number(this.config.dc_litigation_interval_in_minutes);
-        this.config.dh_max_holding_time_in_minutes = Number(this.config.dh_max_holding_time_in_minutes); */
-        this.config.dc_choose_time = Number(this.config.dc_choose_time);
-        this.config.remote_control_enabled = Boolean(this.config.remote_control_enabled);
-        this.config.verbose_logging = Boolean(this.config.verbose_logging);
-        this.config.control_port_enabled = Boolean(this.config.control_port_enabled);
-        this.config.send_logs_to_origintrail = Boolean(this.config.send_logs_to_origintrail);
-        this.$socket.emit('config-update', this.config);
-      },
-      handleChangeDh(value) {
-        // this.pricing = calculatePrice(config.blockchain.trac_price_in_eth, config.blockchain.price_factor, 180, 1);
-
-        if(value == 0 ) {
-          this.updateDcButton = false;
-          this.updateDhButton = true;
-          this.pricing_01mb_180days = 0;
-          this.pricing_1mb_180days = 0;
-          this.pricing_10mb_180days = 0;
-          this.pricing_10mb_730days = 0;
-        } else{
-          this.updateDhButton =false;
-          this.updateDcButton = true;
-          this.pricing_01mb_180days = Math.round(2 * (0.00075 / this.config.blockchain.trac_price_in_eth) + this.config.blockchain.price_factor_dh * Math.sqrt(2 * 180 * 0.1));
-          this.pricing_1mb_180days = Math.round(2 * (0.00075 / this.config.blockchain.trac_price_in_eth) + this.config.blockchain.price_factor_dh * Math.sqrt(2 * 180 * 1));
-          this.pricing_10mb_180days = Math.round(2 * (0.00075 / this.config.blockchain.trac_price_in_eth) + this.config.blockchain.price_factor_dh * Math.sqrt(2 * 180 * 10));
-          this.pricing_10mb_730days = Math.round(2 * (0.00075 / this.config.blockchain.trac_price_in_eth) + this.config.blockchain.price_factor_dh * Math.sqrt(2 * 730 * 10));
-        }
-      },
-      handleChangeDc(value) {
-        // this.pricing = calculatePrice(config.blockchain.trac_price_in_eth, config.blockchain.price_factor, 180, 1);
-
-         if(value == 0 ){
-           this.updateDcButton = true;
-           this.updateDhButton = false;
-           this.pricing_01mb_180days = 0;
-          this.pricing_1mb_180days = 0;
-          this.pricing_10mb_180days = 0;
-          this.pricing_10mb_730days = 0;
-        }else{
-          this.updateDhButton =true;
-          this.updateDcButton = false;
-           this.pricing_01mb_180days = Math.round(2 * (0.00075 / this.config.blockchain.trac_price_in_eth) + this.config.blockchain.price_factor_dh * Math.sqrt(2 * 180 * 0.1));
-          this.pricing_1mb_180days = Math.round(2 * (0.00075 / this.config.blockchain.trac_price_in_eth) + this.config.blockchain.price_factor_dc * Math.sqrt(2 * 180 * 1));
-          this.pricing_10mb_180days = Math.round(2 * (0.00075 / this.config.blockchain.trac_price_in_eth) + this.config.blockchain.price_factor_dc * Math.sqrt(2 * 180 * 10));
-          this.pricing_10mb_730days = Math.round(2 * (0.00075 / this.config.blockchain.trac_price_in_eth) + this.config.blockchain.price_factor_dc * Math.sqrt(2 * 730 * 10));
-        }
-
-
-      },
-      calculatePrice(tracePrice, priceFactor, timeSpan, datasetSize) {
-        // eslint-disable-next-line max-len
-        return 2 * (0.00075 / tracePrice) + priceFactor * sqrt(2 * datasetSize * timeSpan / 1440);
-      },
-      checkDhPriceFactor() {
-        return this.config.blockchain.price_factor_dh == 0 || this.config.blockchain.price_factor_dc >= 0;
-      },
-      checkDcPriceFactor() {
-        return this.config.blockchain.price_factor_dc == 0 || this.config.blockchain.price_factor_dh >= 0;
-      },
-      addInput() {
-        this.config.network.remoteWhitelist.push('');
-      },
-      removeInput(item) {
-        if (this.config.network.remoteWhitelist.length === 1) {
-          return;
-        }
-        const index = this.config.network.remoteWhitelist.indexOf(item);
-        if (index !== -1) {
-          this.config.network.remoteWhitelist.splice(index, 1);
-        }
-      },
-      addInputNetwork() {
-        this.config.network.bootstraps.push('');
-      },
-      removeInputNetwork(item) {
-        if (this.config.network.bootstraps.length === 1) {
-          return;
-        }
-        const index = this.config.network.bootstraps.indexOf(item);
-        if (index !== -1) {
-          this.config.network.bootstraps.splice(index, 1);
-        }
-      }
+    switch (this.systemData.info.environment.toLowerCase()) {
+      case 'mariner':
+        this.network = 'Mainnet';
+        break;
+      case 'production':
+        this.network = 'Testnet';
+        break;
+      default:
+        this.network = 'Mainnet';
     }
-  };
+
+    window.EventBus.$on('node_id', (data) => {
+      this.node_id = data;
+    });
+  },
+  sockets: {
+    updateComplete() {
+      console.log('updated');
+    },
+  },
+  methods: {
+    onSubmit() {
+      // Fix types.
+      this.config.node_port = Number(this.config.node_port);
+      this.config.node_rpc_port = Number(this.config.node_rpc_port);
+      this.config.node_remote_control_port = Number(this.config.node_remote_control_port);
+      this.config.request_timeout = Number(this.config.request_timeout);
+      this.config.dc_holding_time_in_minutes = Number(this.config.dc_holding_time_in_minutes);
+      /* this.config.dc_litigation_interval_in_minutes = Number(this.config.dc_litigation_interval_in_minutes);
+        this.config.dh_max_holding_time_in_minutes = Number(this.config.dh_max_holding_time_in_minutes); */
+      this.config.dc_choose_time = Number(this.config.dc_choose_time);
+      this.config.remote_control_enabled = Boolean(this.config.remote_control_enabled);
+      this.config.verbose_logging = Boolean(this.config.verbose_logging);
+      this.config.control_port_enabled = Boolean(this.config.control_port_enabled);
+      this.config.send_logs_to_origintrail = Boolean(this.config.send_logs_to_origintrail);
+      this.$socket.emit('config-update', this.config);
+    },
+    handleChangeDh(value) {
+      // this.pricing = calculatePrice(config.blockchain.trac_price_in_eth, config.blockchain.price_factor, 180, 1);
+
+      if (value == 0) {
+        this.updateDhButton = true;
+        this.pricing_01mb_180days = 0;
+        this.pricing_1mb_180days =0;
+        this.pricing_10mb_180days =0;
+        this.pricing_10mb_730days = 0;
+      } else {
+        this.updateDhButton = false;
+        this.pricing_01mb_180days = Math.round(2 * (0.00075 / this.config.blockchain.trac_price_in_eth) + this.config.blockchain.dh_price_factor * Math.sqrt(2 * 180 * 0.1));
+        this.pricing_1mb_180days = Math.round(2 * (0.00075 / this.config.blockchain.trac_price_in_eth) + this.config.blockchain.dh_price_factor * Math.sqrt(2 * 180 * 1));
+        this.pricing_10mb_180days = Math.round(2 * (0.00075 / this.config.blockchain.trac_price_in_eth) + this.config.blockchain.dh_price_factor * Math.sqrt(2 * 180 * 10));
+        this.pricing_10mb_730days = Math.round(2 * (0.00075 / this.config.blockchain.trac_price_in_eth) + this.config.blockchain.dh_price_factor * Math.sqrt(2 * 730 * 10));
+      }
+    },
+    handleChangeDc(value) {
+      // this.pricing = calculatePrice(config.blockchain.trac_price_in_eth, config.blockchain.price_factor, 180, 1);
+
+      if (value == 0) {
+        this.updateDcButton = true;
+      } else {
+        this.updateDcButton = false;
+        //   this.pricing_01mb_180days = Math.round(2 * (0.00075 / this.config.blockchain.trac_price_in_eth) + this.config.blockchain.dc_price_factor * Math.sqrt(2 * 180 * 0.1));
+        //   this.pricing_1mb_180days = Math.round(2 * (0.00075 / this.config.blockchain.trac_price_in_eth) + this.config.blockchain.dc_price_factor * Math.sqrt(2 * 180 * 1));
+        //   this.pricing_10mb_180days = Math.round(2 * (0.00075 / this.config.blockchain.trac_price_in_eth) + this.config.blockchain.dc_price_factor * Math.sqrt(2 * 180 * 10));
+        //   this.pricing_10mb_730days = Math.round(2 * (0.00075 / this.config.blockchain.trac_price_in_eth) + this.config.blockchain.dc_price_factor * Math.sqrt(2 * 730 * 10));
+      }
+    },
+    calculatePrice(tracePrice, priceFactor, timeSpan, datasetSize) {
+      // eslint-disable-next-line max-len
+      return 2 * (0.00075 / tracePrice) + priceFactor * sqrt(2 * datasetSize * timeSpan / 1440);
+    },
+    checkDhPriceFactor() {
+      return this.config.blockchain.price_factor_dh == 0 || this.config.blockchain.price_factor_dc >= 0;
+    },
+    checkDcPriceFactor() {
+      return this.config.blockchain.price_factor_dc == 0 || this.config.blockchain.price_factor_dh >= 0;
+    },
+    addInput() {
+      this.config.network.remoteWhitelist.push('');
+    },
+    removeInput(item) {
+      if (this.config.network.remoteWhitelist.length === 1) {
+        return;
+      }
+      const index = this.config.network.remoteWhitelist.indexOf(item);
+      if (index !== -1) {
+        this.config.network.remoteWhitelist.splice(index, 1);
+      }
+    },
+    addInputNetwork() {
+      this.config.network.bootstraps.push('');
+    },
+    removeInputNetwork(item) {
+      if (this.config.network.bootstraps.length === 1) {
+        return;
+      }
+      const index = this.config.network.bootstraps.indexOf(item);
+      if (index !== -1) {
+        this.config.network.bootstraps.splice(index, 1);
+      }
+    },
+  },
+};
 </script>
 <style>
     #app {
