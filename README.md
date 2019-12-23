@@ -9,12 +9,25 @@
 - *Withdraw* earned token from your profile to your Management wallet 
 
 ## How to run Houston?
-```
 1. Open your terminal
-2. Clone the project to your local machine by running: "git clone https://github.com/OriginTrail/houston-v4.git"
+2. Clone the project to your local machine by running: 
+
+```
+git clone https://github.com/OriginTrail/houston-v4.git
+```
+
 3. Enter "houston-v4" folder.
-4. When inside the folder please run the following command: "npm install" and wait for the process to be finished
-5. After the installation process is finished run the following command: "npm run houston". If Houston app is started you should be seeing the following in your terminal: 
+4. When inside the folder please run the following command and wait for the process to be finished: 
+```
+npm install
+```
+5. After the installation process is finished run the following command: 
+```
+npm run houston
+```
+
+If Houston app is started you should be seeing the following in your terminal: 
+```
 -----------------------------------------------
  DONE  Compiled successfully in 9882ms                                                                                                                                                                                                                       
   App running at:
@@ -24,12 +37,19 @@
   Note that the development build is not optimized.
   To create a production build, run npm run build.
  ------------------------------------------------
-5. Your Houston app is now ready for use at http://localhost:8080/
+```
+5. Your Houston app is now ready for use. Open your browser and navigate to http://localhost:8080/
+
+
+
+## Development instructions
+
+
 ```
 
 ### Compiles and hot-reloads for development
 ```
-npm run houston
+npm run serve
 ```
 
 ### Compiles and minifies for production
