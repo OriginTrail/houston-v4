@@ -1,89 +1,87 @@
 <template>
-    <div class="container">
-        <div class="wrapper">
-            <div class="el-row">
-                <div class="el-col">
-                    <h1 class="margin-20 account-headline">My Account</h1>
-                </div>
-            </div>
-            <div class="el-row">
-                <div class="el-col">
-                    <p class="margin-30 lead-paragraph">
-                        This is the landing page for your own node of the OriginTrail Decentralized Network (ODN). Here you’ll find general information about your node’s activity and your current balance in test TRAC and ETH.
-                        <br>
-                        Note: Keep in mind that the Houston app is a visual representation of your node’s activity. You can interact with your node without Houston, as well.
-                    </p>
-                </div>
-            </div>
-            <div class="el-row">
-                <div class="el-col">
-                    <h3 class="margin-10">GENERAL</h3>
-                </div>
-            </div>
-            <div class="el-row special-row margin-30">
-                <el-col :span="5" class="first-radius">
-                    <div class="el-col field">
-                        <span class="little-span">Node ID</span>
-                    </div>
-                </el-col>
-                <el-col :span="19" class="second-radius">
-                    <div class="el-col field">
-                        <p> {{ nodeId }}</p>
-                    </div>
-                </el-col>
-            </div>
-            <div class="el-row special-row margin-30">
-                <el-col :span="5" class="first-radius">
-                    <div class="el-col field">
-                        <p><span class="little-span">Management wallet ID</span></p>
-                    </div>
-                </el-col>
-                <el-col :span="19" class="second-radius">
-                    <div class="el-col field">
-                        <p>{{ management_wallet }}</p>
-                    </div>
-                </el-col>
-            </div>
-            <div class="el-row special-row margin-30">
-                <el-col :span="5" class="first-radius">
-                    <div class="el-col field">
-                        <p><span class="little-span">Operational wallet ID</span></p>
-                    </div>
-                </el-col>
-
-                <el-col :span="19" class="second-radius">
-                    <div class="el-col field">
-                        <p>{{ operationalWallet }}</p>
-                    </div>
-                </el-col>
-            </div>
-            <div class="el-row special-row margin-30">
-                <el-col :span="5" class="first-radius">
-                    <div class="el-col field">
-                        <p><span class="little-span">ERC 725 identity</span></p>
-                    </div>
-                </el-col>
-
-                <el-col :span="19" class="second-radius">
-                    <div class="el-col field">
-                        <p>{{ erc725 }}</p>
-                    </div>
-                </el-col>
-            </div>
-            <div class="el-row margin-30">
-                <div class="el-col line-breaker"></div>
-            </div>
+    <div class="container-fluid width100">
+        <div class="">
             <el-row>
-                <el-col :span="24" class="right-balance">
+                <el-col :span="24" class="text-left">
+                    <h1 class="margin-20 section-headline">Overview</h1>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="12" class="padd-right">
+                    <h3 class="margin-10 text-left small-headline">General</h3>
+                    <div class="el-row special-row margin-30" >
+                        <el-col :span="6" class="first-radius">
+                            <div class="el-col">
+                                <span class="little-span">Network</span>
+                            </div>
+                        </el-col>
+                        <el-col :span="18" class="second-radius">
+                            <div class="el-col field">
+                               <p> {{ configNetworkId | networkIdFilter }}</p>
+                            </div>
+                        </el-col>
+                    </div>
+                    <div class="el-row special-row margin-30">
+                        <el-col :span="6" class="first-radius">
+                            <div class="el-col">
+                                <span class="little-span">Node ID</span>
+                            </div>
+                        </el-col>
+                        <el-col :span="18" class="second-radius">
+                            <div class="el-col field">
+                                <p> {{ nodeId }}</p>
+                            </div>
+                        </el-col>
+                    </div>
+                    <div class="el-row special-row margin-30">
+                        <el-col :span="6" class="first-radius">
+                            <div class="el-col ">
+                                <span class="little-span">Management wallet ID</span>
+                            </div>
+                        </el-col>
+                        <el-col :span="18" class="second-radius">
+                            <div class="el-col field">
+                                <p>{{ management_wallet }}</p>
+                            </div>
+                        </el-col>
+                    </div>
+                    <div class="el-row special-row margin-30">
+                        <el-col :span="6" class="first-radius">
+                            <div class="el-col ">
+                                <span class="little-span">Operational wallet ID</span>
+                            </div>
+                        </el-col>
+
+                        <el-col :span="18" class="second-radius">
+                            <div class="el-col field">
+                                <p>{{ operationalWallet }}</p>
+                            </div>
+                        </el-col>
+                    </div>
+                    <div class="el-row special-row margin-30">
+                        <el-col :span="6" class="first-radius">
+                            <div class="el-col ">
+                                <span class="little-span">ERC 725 identity</span>
+                            </div>
+                        </el-col>
+
+                        <el-col :span="18" class="second-radius">
+                            <div class="el-col field">
+                                <p>{{ erc725 }}</p>
+                            </div>
+                        </el-col>
+                    </div>
+                </el-col>
+                <el-col :span="12">
                     <div class="el-row">
                         <div class="el-col">
-                            <h3 class="margin-10 margintop-10">ASSETS BALANCE</h3>
+                            <h3 class="margin-10 margintop-10 text-left small-headline">NODE BALANCE</h3>
                         </div>
                     </div>
-                    <el-row class="balance-wrapper">
 
+                    <el-row class="balance-wrapper">
                         <div ref="nesto" class="node-logo"></div>
-                        <el-col class="balancebox margin-10 margintop-10" :span="10">
+                        <el-col class="balancebox margin-10 margintop-10" :span="12">
                             <img class="balance-logo" src="~@/assets/balance-atrac.svg" alt="">
                             <el-col>
                                 <p class="balance-cur">TRAC</p>
@@ -103,7 +101,7 @@
                                 </p>
                             </el-col>
                         </el-col>
-                        <el-col class="balancebox margin-10 margintop-10" :span="10">
+                        <el-col class="balancebox margin-10 margintop-10" :span="12">
                             <img class="balance-logo" src="~@/assets/balance-eth.svg" alt="">
                             <el-col>
                                 <p class="balance-cur">ETH</p>
@@ -114,6 +112,13 @@
                             </el-col>
                         </el-col>
                     </el-row>
+                </el-col>
+            </el-row>
+
+
+            <el-row>
+                <el-col :span="24" class="right-balance">
+
                 </el-col>
             </el-row>
             <!--<el-row>-->
@@ -141,7 +146,17 @@
 <script>
 
 export default {
-  props: ['profileStorageAddress', 'erc725', 'profileAddress', 'operationalWallet', 'tokenAddress', 'management_wallet_input', 'nodeId', 'submitted'],
+  props: [
+    'profileStorageAddress',
+    'erc725',
+    'profileAddress',
+    'operationalWallet',
+    'tokenAddress',
+    'management_wallet_input',
+    'nodeId',
+    'submitted',
+    'configData'
+  ],
   data() {
     return {
       name: 'Account',
@@ -171,6 +186,7 @@ export default {
         },
       },
       web3: {},
+      configNetworkId:'',
       ow_eth_balance: 0,
       mw_eth_balance: 0,
       mw_trac_balance: 0,
@@ -189,15 +205,18 @@ export default {
       ow_eth_balance_decreased: false,
       management_wallet: '',
       node_id: '',
+      node_address: ''
     };
   },
   mounted() {
+
     if (this.submitted) {
       this.getAllBalances();
       this.$socket.emit('get-total-payouts');
       this.$socket.emit('get-profile');
       console.log('pozvana u my account');
     }
+
 
     window.EventBus.$on('management_wallet_changed', (data) => {
       this.management_wallet = data;
@@ -206,7 +225,18 @@ export default {
     window.EventBus.$on('node_id', (data) => {
       this.node_id = data;
     });
+
+    // window.EventBus.$on('config', (data) => {
+    //   this.configNetworkId = data.blockchain.network_id;
+    // });
   },
+  // updated(){
+  //   if(this.configData){
+  //     this.configNetworkId = this.configData.blockchain.network_id;
+  //     console.log(this.configData,'data')
+  //   }
+  //
+  // },
   watch: {
     locked_trac(newVal, oldVal) {
       if (newVal.toString() !== oldVal.toString() && oldVal !== 0) {
@@ -393,6 +423,14 @@ export default {
 
       return value;
     },
+    networkIdFilter(value){
+      if(value == 'rinkeby')
+      {
+        return 'Testnet';
+      }else{
+        return 'Mainnet';
+      }
+    },
     toTrac(val) {
       const am = new window.Eth.BN(val);
       const base = new window.Eth.BN(10);
@@ -406,12 +444,19 @@ export default {
   },
 };
 </script>
-
 <style scoped lang="scss">
-    .wrapper {
-        p {
-            margin-bottom: 1rem;
-        }
+    .small-headline{
+        font-weight: 800;
+        font-family: Roboto;
+        font-size: 24px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.33;
+        letter-spacing: normal;
+    }
+    .padd-right{
+        padding-right: 30px;
     }
     .line-breaker {
         width: 80%;
@@ -447,24 +492,27 @@ export default {
         font-stretch: normal;
         line-height: 1.33;
         letter-spacing: normal;
-        color: #1a4559;
+        color: #4c569c;
         text-align: center;
         margin-top: 25px;
         margin-bottom: 14px;
+        font-weight: 900;
     }
 
     .balancebox {
         position: relative;
         height: 240px;
         width: 240px;
-        background: url("~@/assets/outline-logo.png");
         margin-right: 50px;
+        border: solid 1.7px #4c569c;
+        border-radius: 50%;
     }
 
     .balance-logo {
         position: absolute;
-        top: 0;
-        left: 0;
+        top: -2px;
+        left: -2px;
+        width: 240px;
     }
 
     .balance-info-currency {
@@ -474,9 +522,9 @@ export default {
         font-stretch: normal;
         line-height: 1.5;
         letter-spacing: normal;
-        color: #2d095e;
         text-align: center;
         margin-bottom: 7px;
+        margin-top: 0;
     }
 
     .balance-info {
@@ -536,7 +584,6 @@ export default {
     }
 
     .field {
-        background-color: #ebeef5;
         padding: 7px 10px;
         font-size: 16px;
         font-weight: bold;
@@ -549,12 +596,42 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 45px;
+        height: 25px;
+        border-radius: 4px;
+        border: solid 1px #acacac;
+        p{
+            font-family: Roboto;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1;
+            letter-spacing: normal;
+            color: #131415;
+            opacity: .5;
+            line-height: 40px;
+            margin-top: 30px;
+        }
     }
 
     .first-radius{
         border-bottom-left-radius: 4px;
         border-top-left-radius: 4px;
+        .el-col{
+            text-align: left;
+            span{
+                font-family: Roboto;
+                font-size: 14px;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 1;
+                letter-spacing: normal;
+                color: #131415;
+                opacity: .5;
+                line-height: 40px;
+            }
+        }
     }
 
     .second-radius{
@@ -579,17 +656,6 @@ export default {
 
     h3 {
         margin-bottom: 40px !important;
-    }
-
-    .little-span {
-        font-size: 12px;
-        font-weight: bold;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 30px;
-        letter-spacing: normal;
-        color: #526173;
-        margin-right: 10px;
     }
 
     .inline {

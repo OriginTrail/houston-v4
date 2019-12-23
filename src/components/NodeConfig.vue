@@ -152,6 +152,10 @@
                     <el-form-item label="Price Factor">
                         <el-col :span="22">
                             <el-input v-model="config.blockchain.price_factor" type="number" class="no-spin" ></el-input>
+
+                            <el-input v-model="config.blockchain.dc_price_factor" type="number" class="no-spin" ></el-input>
+
+                            <el-input v-model="config.blockchain.dh_price_factor" type="number" class="no-spin" ></el-input>
                         </el-col>
                         <el-col :span="2">
                             <el-popover
@@ -651,6 +655,8 @@ export default {
           plugins: [''],
           trac_price_in_eth: '',
           price_factor: '',
+          dc_price_factor: '',
+          dh_price_factor: ''
         },
         dc_holding_time_in_minutes: '',
         dc_token_amount_per_holder: '',

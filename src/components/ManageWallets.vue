@@ -1,6 +1,6 @@
 <template>
   <div class="panel">
-    <h1>Manage wallets <el-popover
+    <h1>Manage Wallets<el-popover
       placement="top-start"
       title="Manage wallets"
       width="500"
@@ -15,22 +15,26 @@ You can use this interface to manage your wallets (add/remove both). IMPORTANT N
       <i class="el-icon-info" slot="reference"></i>
     </el-popover></h1>
     <span>Add/Remove wallets (Management & Operational)</span>
+    <p>Note: You cannot remove a management wallet if you only have one associated with to your node. To change your existing management wallet, first add a new one, and then proceed with removing the old wallet.</p>
     <el-form>
-      <el-form-item label="Please enter wallet">
-        <el-input v-model="walletToAdd"></el-input>
-      </el-form-item>
-      <el-form-item label="Wallet type to manage">
-        <el-select v-model="selected_wallet_type" placeholder="Select" clearable>
+      <el-form-item>
+        <p class="label-p">Wallet Type to Manage:</p>
+        <el-select style="width: 100%" v-model="selected_wallet_type" placeholder="Select" clearable>
           <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
           </el-option>
         </el-select>
       </el-form-item>
-      <el-button @click="add">Add Wallet</el-button>
-      <el-button @click="remove">Remove Wallet</el-button>
+      <el-form-item>
+        <p class="label-p">Enter Wallet:</p>
+        <el-input v-model="walletToAdd"></el-input>
+      </el-form-item>
+
+      <el-button style="width: 47%" class="houston-btn" @click="add">ADD WALLET</el-button>
+      <el-button style="width: 47%" class="" @click="remove">REMOVE WALLET</el-button>
     </el-form>
 
   </div>

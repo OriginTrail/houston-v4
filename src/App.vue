@@ -2,7 +2,7 @@
     <div id="app">
         <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
             <el-menu-item index="0">
-                <img alt="OriginTrail" src="./assets/ot-dark_purple.svg" class="logo"> Houston
+                <img alt="OriginTrail" src="./assets/ot-dark_purple.svg" class="logo">  Houston v4
             </el-menu-item>
             <el-menu-item index="1" :disabled="!submitted">My Account</el-menu-item>
             <el-menu-item index="2" :disabled="!submitted">Node Profile</el-menu-item>
@@ -19,47 +19,55 @@
                             :operational-wallet="operational_wallet"
                             :token-address="token_contract"
                             :node-id="node_id"
+                            :configData="configData"
                             :management_wallet_input="management_wallet_input"></my-account>
             </el-container>
-            <el-container v-else-if="submitted && activeIndex2 === '2'">
-                <el-aside width="300px">
-                    <balances
-                            :profile-storage-address="profile_storage_address"
-                            :profile-address="profile_address"
-                            :erc725="erc_identity"
-                            :operational-wallet="operational_wallet"
-                            :token-address="token_contract"
-                            :management_wallet_input="management_wallet_input"
-                    ></balances>
-                </el-aside>
-                <el-main v-loading="loading"
-                         :element-loading-text="loading_text">
-                    <el-row>
-                        <el-col :span="12">
-                            <deposit-eth :operational-wallet="operational_wallet"></deposit-eth>
-                        </el-col>
-                        <el-col :span="12">
-                            <deposit-tokens
-                                    :profile-address="profile_address"
-                                    :token-address="token_contract"
-                                    :erc725="erc_identity">
-                            </deposit-tokens>
-                        </el-col>
-                    </el-row>
-                    <el-row>
-                        <el-col :span="12">
-                            <withdraw
-                                    :erc725="erc_identity"
-                                    :profile-address="profile_address"
-                            ></withdraw>
-                        </el-col>
-                        <el-col :span="12">
-                            <manage-wallets
-                                    :erc725="erc_identity"></manage-wallets>
-                        </el-col>
-                    </el-row>
-                </el-main>
-            </el-container>
+
+            <div v-else-if="submitted && activeIndex2 === '2'" class="token-management-wrapper">
+                <el-row >
+                    <ManagementHeader></ManagementHeader>
+                </el-row>
+                <el-container>
+                    <el-aside width="30%">
+                        <balances
+                                :profile-storage-address="profile_storage_address"
+                                :profile-address="profile_address"
+                                :erc725="erc_identity"
+                                :operational-wallet="operational_wallet"
+                                :token-address="token_contract"
+                                :management_wallet_input="management_wallet_input"
+                        ></balances>
+                    </el-aside>
+                    <el-main v-loading="loading"
+                             :element-loading-text="loading_text">
+                        <el-row>
+                            <el-col :span="12">
+                                <deposit-eth :operational-wallet="operational_wallet"></deposit-eth>
+                            </el-col>
+                            <el-col :span="12">
+                                <deposit-tokens
+                                        :profile-address="profile_address"
+                                        :token-address="token_contract"
+                                        :erc725="erc_identity">
+                                </deposit-tokens>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col :span="12">
+                                <withdraw
+                                        :erc725="erc_identity"
+                                        :profile-address="profile_address"
+                                ></withdraw>
+                            </el-col>
+                            <el-col :span="12">
+                                <manage-wallets
+                                        :erc725="erc_identity"></manage-wallets>
+                            </el-col>
+                        </el-row>
+                    </el-main>
+                </el-container>
+            </div>
+
             <el-container v-else-if="submitted && activeIndex2 === '3'">
                 <node-config :node-config="configData" :system="systemData" :node-id="node_id" v-if="showConfig"></node-config>
             </el-container>
@@ -153,6 +161,8 @@ import MyAccount from './components/MyAccount.vue';
 import NodePricing from './components/NodePricing.vue';
 import Jobs from './components/Jobs.vue';
 import NodeConfig from './components/NodeConfig.vue';
+import ManagementHeader from './components/TokenManagementHeader.vue';
+
 
 export default {
   name: 'app',
@@ -234,6 +244,7 @@ export default {
     if (window.screen.width <= 770) {
       this.mobileTrue = true;
     }
+
   },
   methods: {
     submitIdentity() {
@@ -251,6 +262,7 @@ export default {
       window.EventBus.$emit('get-balances-event');
     },
     handleSelect(key, keyPath) {
+
       /* eslint-disable */
       this.activeIndex2 = key;
       if (key == 1) {
@@ -271,17 +283,16 @@ export default {
     connect() {
       console.log('Socket connected. Checking for version!');
       this.$socket.emit('get-balance');
-        this.$socket.emit('get-balance');
+      this.$socket.emit('get-balance');
       this.$socket.emit('get-node-info');
     },
     config(val) {
       console.log(val, 'config');
       this.node_id = val.identity;
       this.configData = val;
+      window.EventBus.$emit('config',val);
       this.showConfig = true;
-
         window.EventBus.$emit('node_id', this.node_id);
-
     },
     system(val) {
         this.systemData = val;
@@ -305,6 +316,7 @@ export default {
     Withdraw,
     ManageWallets,
     MyAccount,
+    ManagementHeader,
   },
 };
 </script>
@@ -312,7 +324,6 @@ export default {
 <style lang="scss">
 
     @import "./scss/landig-page";
-
     #app {
         font-family: 'Roboto', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -321,9 +332,18 @@ export default {
         color: #2c3e50;
     }
 
+    .el-menu--horizontal>.el-menu-item.is-active {
+        border-bottom: 2px solid #409EFF;
+        color: #303133;
+    }
+
+    .el-menu-item:hover{
+        background-color: #f6f6f6;
+    }
+
     .logo {
         width: 59%;
-
+        margin-right: 10px;
     }
 
     .el-aside {
@@ -331,10 +351,13 @@ export default {
     }
 
     .panel {
-        background-color: #f3f3f3;
+        background-color: #ffffff;
         margin: 10px;
         padding: 10px 20px;
-        border-radius: 8px;
+        border-radius: 4px;
+        border: solid 1px var(--grey_200A);
+        text-align: left;
+        border: 1px solid #dfdfdf;
     }
 
     .panel-form {
@@ -356,5 +379,9 @@ export default {
 
     .el-main {
         height: 100%;
+    }
+    .token-management-wrapper{
+        width: 100%;
+        padding: 0 70px 0 80px;
     }
 </style>

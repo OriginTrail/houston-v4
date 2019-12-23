@@ -1,25 +1,33 @@
 <template>
   <div class="panel">
-    <h1>Withdraw TRAC <el-popover
+    <h1>Withdraw TRAC from Your Node<el-popover
       placement="top-start"
       title="Withdraw TRAC"
       width="300"
+      style="margin-left: 10px"
       trigger="hover"
       content="You can always withdraw the amount of unstaked (not locked in a running job) TRAC from your node profile. This process is performed in a two-step fashion, with a 5min delay between steps. This is needed to avoid certain race conditions within the system functioning. Withdrawing TRAC from your node profile will send the TRAC to your management wallet.
 The maximum amount of TRAC safe to withdraw is shown in the left sidebar. Keep in mind that if you withdraw all TRAC available, your node will not be able to respond to new offers because it will not be able to stake TRAC for the job. We recommend to always have some unlocked TRAC on the profile so that your node can receive new jobs.">
       <i class="el-icon-info" slot="reference"></i>
     </el-popover></h1>
-    <span>Withdraw TRAC from your Profile</span>
+    <span>This will withdraw TRAC from your ODN node profile.</span>
+    <el-col :span="24" class="second-radius">
+      <div class="el-col field">
+        <p class="label-p">Depositing to the Following Operational Wallet:</p>
+        <p class="op-wallet">SMART CONTRACT ADDRESS SHOULD BE HERE</p>
+      </div>
+    </el-col>
     <el-form>
-      <el-form-item label="Wallet to withdraw to - Management wallet">
+      <p class="label-p">Amount to Withdraw:</p>
+      <el-form-item>
+        <el-input-number v-model="amount" :precision="3" :step="0.01" :min="0"></el-input-number>
+      </el-form-item>
+      <el-form-item>
+        <p class="label-p">Withdrawing to the following management wallet:</p>
         <el-input v-model="wallet" :disabled="true"></el-input>
       </el-form-item>
-      <el-form-item label="Please enter amount to withdraw">
-        <el-input-number v-model="amount" :precision="3"
-                         :step="0.01" :min="0"></el-input-number>
-      </el-form-item>
-      <el-button @click="startTokenWithdrawal">Tokens Withdrawal</el-button>
-      <el-button @click="withdrawTokens">Withdraw Tokens</el-button>
+      <el-button class="houston-btn" style="width: 47%" @click="startTokenWithdrawal">Tokens Withdrawal</el-button>
+      <el-button class="houston-white-btn " style="width: 47%" @click="withdrawTokens">Withdraw Tokens</el-button>
     </el-form>
   </div>
 </template>
@@ -94,3 +102,61 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .block{
+    display: block;
+  }
+  .houston-btn{
+    color: #ffffff;
+  }
+  .houston-btn:hover{
+    color: #ffffff;
+    background-color: #1d2667;
+    transition: all .2s;
+  }
+  .houston-btn:focus{
+    color: #ffffff;
+    background-color: #1d2667;
+    transition: all .2s;
+  }
+  .which-token{
+    margin-left: 10px;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #131415;
+  }
+  .label-p{
+    opacity: 0.5;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    margin-bottom: 10px;
+    color: #131415;
+  }
+
+  .op-wallet{
+    border-radius: 4px;
+    border: solid 1px #acacac;
+    background-color: #f6f6f6;
+    opacity: 0.5;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    color: #131415;
+    padding: 13px 15px;
+  }
+</style>
