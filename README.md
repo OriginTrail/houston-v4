@@ -10,8 +10,8 @@
 
 ## Project setup
 ```
-1. Clone the project to your computer
-2. Open your terminal and enter the "houston-v4" folder.
+1. Clone the project to your local machine by running: "https://github.com/OriginTrail/houston-v4.git" from your terminal
+2. Enter "houston-v4" folder.
 3. When inside the folder please run the following command: "npm install" and wait for the process to be finished
 4. After the installation process is finished run the following command: "npm run houston". If Houston app is started you should be seeing the following in your terminal: 
 -----------------------------------------------
