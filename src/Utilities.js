@@ -99,7 +99,7 @@ export default {
   },
 
   connectToTestnet() {
-    window.hubAddress = '0xE92dCa9Fe0F079D582a68ca8C55fb7BDa2558F2c';
+    window.hubAddress = '0x85720D4D09A52eD66656b28c68567E41AD45dD0e';
     window.keccakAddress = '0xfd010324268fec8868c663ce2cde2de8cb7d832a';
 
     if (typeof web3 !== 'undefined' && window.screen.width > 770) {

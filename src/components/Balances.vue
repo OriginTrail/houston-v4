@@ -1,52 +1,53 @@
 <template>
   <div>
-    <h2>Node profile</h2>
     <el-row v-bind:class="[
     total_trac_increased ? 'increased' : '',
     total_trac_decreased ? 'decreased' : '',
     'balance-row'
     ]">
-      <el-col :span="12" class="align-left">TOTAL</el-col>
-      <el-col :span="12">{{total_trac | toTrac}} TRAC</el-col>
+      <el-col>
+        <h2 class="balance-headline">ODN Node Profile</h2>
+      </el-col>
+      <el-col :span="12" class="align-left left-text">TOTAL</el-col>
+      <el-col :span="12" class="result">{{total_trac | toTrac}} TRAC</el-col>
     </el-row>
 
     <el-row class="balance-row"
             v-bind:class="[locked_trac_changed ? 'changed' : '', 'balance-row']">
       <el-col :span="12" class="align-left">LOCKED</el-col>
-      <el-col :span="12">{{locked_trac | toTrac}} TRAC</el-col>
+      <el-col :span="12" class="result">{{locked_trac | toTrac}} TRAC</el-col>
     </el-row>
 
     <el-row class="balance-row">
       <el-col :span="12" class="align-left">MIN. STAKE</el-col>
-      <el-col :span="12">{{minimum_stake | toTrac}} TRAC</el-col>
+      <el-col :span="12" class="result">{{minimum_stake | toTrac}} TRAC</el-col>
     </el-row>
 
     <el-row class="balance-row">
       <el-col :span="12" class="align-left">SAFE TO WITHDRAW</el-col>
-      <el-col :span="12">{{safe_to_withdraw | toTrac}} TRAC</el-col>
+      <el-col :span="12" class="result">{{safe_to_withdraw | toTrac}} TRAC</el-col>
     </el-row>
 
-    <h2>Balances</h2>
-    <h1>Operational wallet</h1>
-    <h6>{{operationalWallet}}</h6>
+    <h2 class="balance-headline">Operational wallet</h2>
+    <h6 class="address">{{operationalWallet}}</h6>
     <el-row class="balance-row" v-bind:class="[
     ow_eth_balance_increased ? 'increased' : '',
     ow_eth_balance_decreased ? 'decreased' : '',
     'balance-row'
     ]">
       <el-col :span="12" class="align-left">ETH</el-col>
-      <el-col :span="12">{{ow_eth_balance}}</el-col>
+      <el-col :span="12" class="result">{{ow_eth_balance}}</el-col>
     </el-row>
 
-    <h1>Management wallet</h1>
-    <h6>{{management_wallet}}</h6>
+    <h2 class="balance-headline">Management wallet</h2>
+    <p class="address">{{management_wallet}}</p>
     <el-row class="balance-row" v-bind:class="[
     mw_eth_balance_increased ? 'increased' : '',
     mw_eth_balance_decreased ? 'decreased' : '',
     'balance-row'
     ]">
       <el-col :span="12" class="align-left">ETH</el-col>
-      <el-col :span="12">{{mw_eth_balance}}</el-col>
+      <el-col :span="12" >{{mw_eth_balance}}</el-col>
     </el-row>
 
     <el-row class="balance-row" v-bind:class="[
@@ -55,7 +56,7 @@
     'balance-row'
     ]">
       <el-col :span="12" class="align-left">TRAC</el-col>
-      <el-col :span="12">{{mw_trac_balance}}</el-col>
+      <el-col :span="12" class="result">{{mw_trac_balance}}</el-col>
     </el-row>
   </div>
 </template>
@@ -267,6 +268,8 @@ export default {
         .at(this.profileAddress);
 
       profileStorageContract.getStake(this.erc725).then((result) => {
+        console.log(result, 'rezultat get Stake');
+
         this.total_trac = new window.Eth.BN(result[0]);
       });
 
@@ -282,8 +285,62 @@ export default {
 };
 </script>
 <style>
+  .main-headline{
+    font-family: Roboto;
+    font-size: 46px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.17;
+    letter-spacing: normal;
+    color: #131415;
+  }
+
+  .address{
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.75;
+    letter-spacing: normal;
+    color: #131415;
+    margin: 15px 0;
+  }
+
+  .balance-headline{
+    color: #131415;
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+  }
+
   .align-left {
     text-align: left;
+    opacity: 0.5;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    color: #131415;
+  }
+
+  .result{
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    color: #131415;
   }
 
   .balance-row {
@@ -293,7 +350,6 @@ export default {
   }
 
   .balance-row:nth-of-type(odd) {
-    background-color: #220F50;
     color: white;
   }
 
