@@ -14,6 +14,89 @@
         <el-row>
             <el-col>
                 <el-tabs type="card" @tab-click="handleClick">
+                    <el-tab-pane label="Holding Data">
+                        <el-row>
+                            <el-col :span="24">
+                                <data-tables
+                                        :data="holding_data"
+                                        style="width: 100%;"
+                                        v-loading="loading"
+
+                                >
+                                    <el-table-column type="expand" fixed>
+
+                                        <template slot-scope="props">
+                                            <div class="m-l-imports">
+                                                <h2 class="h2-imports"><strong>Financials</strong></h2>
+                                                <el-row class="imports-row">
+                                                    <el-col :span="18">
+                                                        <el-row class="info-block">
+                                                            <el-col :span="8" class="left-info-block">
+                                                                Staked for this job (TRAC)
+                                                            </el-col>
+                                                            <el-col :span="12" class="right-block-info">
+                                                                {{ props.row.staked_amount| realTokenAmount }}
+                                                            </el-col>
+                                                        </el-row>
+                                                        <el-row class="info-block">
+                                                            <el-col :span="8" class="left-info-block">
+                                                                Currently paid (TRAC)
+                                                            </el-col>
+                                                            <el-col :span="12" class="right-block-info">
+                                                                {{ props.row.paid_amount |realTokenAmount}}
+                                                            </el-col>
+                                                        </el-row>
+                                                    </el-col>
+                                                </el-row>
+                                            </div>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column
+                                            label=""
+                                            width="60">
+                                        <template slot-scope="props">
+                                            <div class="hexContainer" id="hexContainerID2">
+                                                <div v-html="props.row.slika"
+                                                     style="border-radius: 50px; overflow: hidden; padding: 0px; margin: 0px; width: 30px; height: 30px; display: inline-block; background: rgb(1, 109, 142);">
+
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column
+                                            :show-overflow-tooltip="true"
+                                            prop="data_set_id"
+                                            label="Dataset">
+                                    </el-table-column>
+                                    <el-table-column
+                                            :show-overflow-tooltip="true"
+                                            prop="offer_id"
+                                            label="Offer ID">
+                                    </el-table-column>
+                                    <el-table-column
+                                            :show-overflow-tooltip="true"
+                                            prop="source_wallet"
+                                            label="Source Wallet">
+                                    </el-table-column>
+                                    <el-table-column
+                                            :show-overflow-tooltip="true"
+                                            prop="root_hash"
+                                            label="Root Hash">
+                                    </el-table-column>
+                                    <el-table-column
+                                            :show-overflow-tooltip="true"
+                                            prop="color"
+                                            label="Encryption color">
+                                    </el-table-column>
+                                    <el-table-column
+                                            :show-overflow-tooltip="true"
+                                            prop="status"
+                                            label="Status">
+                                    </el-table-column>
+                                </data-tables>
+                            </el-col>
+                        </el-row>
+                    </el-tab-pane>
                     <el-tab-pane label="Pending bids" class="tab-pane">
                         <el-row>
                             <el-col :span="24">
@@ -104,89 +187,6 @@
                                             prop="status"
                                             label="Status"
                                             class="status-text">
-                                    </el-table-column>
-                                </data-tables>
-                            </el-col>
-                        </el-row>
-                    </el-tab-pane>
-                    <el-tab-pane label="Holding Data">
-                        <el-row>
-                            <el-col :span="24">
-                                <data-tables
-                                        :data="holding_data"
-                                        style="width: 100%;"
-                                        v-loading="loading"
-
-                                >
-                                    <el-table-column type="expand" fixed>
-
-                                        <template slot-scope="props">
-                                            <div class="m-l-imports">
-                                                <h2 class="h2-imports"><strong>Financials</strong></h2>
-                                                <el-row class="imports-row">
-                                                    <el-col :span="18">
-                                                        <el-row class="info-block">
-                                                            <el-col :span="8" class="left-info-block">
-                                                                Staked for this job (TRAC)
-                                                            </el-col>
-                                                            <el-col :span="12" class="right-block-info">
-                                                                {{ props.row.staked_amount| realTokenAmount }}
-                                                            </el-col>
-                                                        </el-row>
-                                                        <el-row class="info-block">
-                                                            <el-col :span="8" class="left-info-block">
-                                                                Currently paid (TRAC)
-                                                            </el-col>
-                                                            <el-col :span="12" class="right-block-info">
-                                                                {{ props.row.paid_amount |realTokenAmount}}
-                                                            </el-col>
-                                                        </el-row>
-                                                    </el-col>
-                                                </el-row>
-                                            </div>
-                                        </template>
-                                    </el-table-column>
-                                    <el-table-column
-                                            label=""
-                                            width="60">
-                                        <template slot-scope="props">
-                                            <div class="hexContainer" id="hexContainerID2">
-                                                <div v-html="props.row.slika"
-                                                     style="border-radius: 50px; overflow: hidden; padding: 0px; margin: 0px; width: 30px; height: 30px; display: inline-block; background: rgb(1, 109, 142);">
-
-                                                </div>
-                                            </div>
-                                        </template>
-                                    </el-table-column>
-                                    <el-table-column
-                                            :show-overflow-tooltip="true"
-                                            prop="data_set_id"
-                                            label="Dataset">
-                                    </el-table-column>
-                                    <el-table-column
-                                            :show-overflow-tooltip="true"
-                                            prop="offer_id"
-                                            label="Offer ID">
-                                    </el-table-column>
-                                    <el-table-column
-                                            :show-overflow-tooltip="true"
-                                            prop="source_wallet"
-                                            label="Source Wallet">
-                                    </el-table-column>
-                                    <el-table-column
-                                            :show-overflow-tooltip="true"
-                                            prop="root_hash"
-                                            label="Root Hash">
-                                    </el-table-column>
-                                    <el-table-column
-                                            :show-overflow-tooltip="true"
-                                            prop="color"
-                                            label="Encryption color">
-                                    </el-table-column>
-                                    <el-table-column
-                                            :show-overflow-tooltip="true"
-                                            prop="status"
-                                            label="Status">
                                     </el-table-column>
                                 </data-tables>
                             </el-col>
