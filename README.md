@@ -1,5 +1,7 @@
 # HOUSTON v4
 
+Houston is a visual user interface for your [OriginTrail](https://origintrail.io "OriginTrail") Node that makes operating it easy for everyone.
+
 ## Features
 - Setup the node configuration and pricing
 - Display all balances on *Management wallet* and *Operational wallet* as well as your *profile* (ERC725 identity)
@@ -45,7 +47,7 @@ If Houston app is started you should be seeing the following in your terminal:
 ## Development instructions
 
 
-```
+
 
 ### Compiles and hot-reloads for development
 ```
