@@ -8,7 +8,7 @@
 - *Deposit TRAC tokens* to your profile
 - *Withdraw* earned token from your profile to your Management wallet 
 
-## Project setup
+## How to run Houston?
 ```
 1. Open your terminal
 2. Clone the project to your local machine by running: "git clone https://github.com/OriginTrail/houston-v4.git"
@@ -24,7 +24,7 @@
   Note that the development build is not optimized.
   To create a production build, run npm run build.
  ------------------------------------------------
-5. Yourour Houston app is now ready for use at http://localhost:8080/
+5. Your Houston app is now ready for use at http://localhost:8080/
 ```
 
 ### Compiles and hot-reloads for development
