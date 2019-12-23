@@ -413,12 +413,13 @@ export default {
     }
 
     .el-menu--horizontal>.el-menu-item.is-active {
-        border-bottom: 2px solid #409EFF;
+        border-bottom: 2px solid #1d2667;
         color: #303133;
+        background-color: #f6f6f6;
     }
 
     .el-menu-item:hover{
-        background-color: #f6f6f6;
+        background-color: #f6f6f6 !important;
     }
 
     .logo {

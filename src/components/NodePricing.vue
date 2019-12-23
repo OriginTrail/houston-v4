@@ -565,6 +565,7 @@
         top: 7px;
         width: 18px;
         margin-left: 6px;
+
     }
 
     .pop2 img {
