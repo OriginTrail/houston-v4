@@ -14,7 +14,8 @@
 2. Open your terminal and enter the "houston-v4" folder.
 3. When inside the folder please run the following command: "npm install" and wait for the process to be finished
 4. After the installation process is finished run the following command: "npm run houston". If Houston app is started you should be seeing the following in your terminal: 
- **DONE  Compiled successfully in 9882ms                                                                                                                                                                                                                                  18:44:35
+-----------------------------------------------
+ DONE  Compiled successfully in 9882ms                                                                                                                                                                                                                                  18:44:35
 
 
   App running at:
@@ -22,8 +23,8 @@
   - Network: http://xxx.xx.xx.xx:8080/
 
   Note that the development build is not optimized.
-  To create a production build, run npm run build.**
-  
+  To create a production build, run npm run build.
+  -----------------------------------------------
 5. Yourour Houston app is now ready for use at http://localhost:8080/
 ```
 
