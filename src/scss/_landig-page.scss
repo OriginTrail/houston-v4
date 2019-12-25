@@ -5,6 +5,17 @@ $roboto: 'Roboto', sans-serif;
 body {
   padding: 0;
   margin: 0;
+  font-family: $roboto;
+}
+
+.el-notification__content {
+  font-family: $roboto !important;
+  font-size: 13px;
+  line-height: 15px;
+}
+
+.el-notification {
+  width: 400px !important;
 }
 
 .container {

@@ -337,6 +337,17 @@ export default {
       this.$socket.io.uri = `https://${this.node_address}:3000/?password=${this.houston_pass}`;
       this.$socket.open();
 
+      setTimeout(() => {
+          if(!this.$socket.connected) {
+              this.$notify({
+                  message: 'Connection with the node could not be established, please double check provided credentials',
+                  type: 'warning',
+                  duration: 4000
+              });
+          }
+      }, 1000);
+
+
       window.EventBus.$emit('get-balances-event');
     },
     handleSelect(key, keyPath) {
@@ -411,6 +422,7 @@ export default {
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: #2c3e50;
+        padding-bottom: 230px;
     }
 
     .el-menu--horizontal>.el-menu-item.is-active {
