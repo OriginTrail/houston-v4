@@ -355,17 +355,17 @@ export default {
   },
   sockets: {
     balance(balance) {
-      this.eth_balance = (balance / 1000000000000000000).toFixed(4);
+      this.eth_balance = (balance / 1000000000000000000).toFixed(2);
     },
     trac_balance(value) {
       this.trac_balance = (value / 1).toFixed(4);
     },
     profile(profile) {
-      this.stake = profile.stake / 1000000000000000000;
-      this.stake_reserved = (profile.stakeReserved / 1000000000000000000).toFixed(4);
+      this.stake = (profile.stake / 1000000000000000000).toFixed(2);
+      this.stake_reserved = (profile.stakeReserved / 1000000000000000000).toFixed(2);
     },
     total_payouts(val) {
-      this.total_payouts = (val / 1000000000000000000).toFixed(4);
+      this.total_payouts = (val / 1000000000000000000).toFixed(2);
     },
   },
   methods: {
@@ -446,7 +446,13 @@ export default {
   },
 };
 </script>
+<style>
+
+</style>
 <style scoped lang="scss">
+    #app{
+        height: 100vh;
+    }
     .small-headline{
         font-weight: 800;
         font-family: Roboto;
