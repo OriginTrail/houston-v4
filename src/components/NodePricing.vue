@@ -40,7 +40,7 @@
                                 </h3>
                                 <p class="label">Value</p>
                                 <el-input-number class="value-input" v-model="config.blockchain.dh_price_factor"
-                                                 @change="handleChangeDh" :min="0"></el-input-number>
+                                                 @change="handleChangeDh" :min="0" :precision="2" :step="0.1"></el-input-number>
                                 <div class="display-block text-left">
                                     <el-button type="primary" @click="onSubmit" class="houston-btn"
                                                style="margin: 0 auto 20px auto" :disabled="updateDhButton">UPDATE
@@ -61,19 +61,19 @@
                         </el-col>
                         <el-col :span="12" class="text-left " style="padding-left: 20px;">
                             <h3 class="card-headline">
-                                The estimated amount of TRAC your node would ask for as a DH node for jobs based on
+                                The estimated amount of TRAC your node would ask for holding jobs based on
                                 currently set DH Lambda:
                             </h3>
                             <ul>
-                                <li>A dataset of 0.1 MB with a 6-month lifespan: <span class="price-in-trac">{{ pricing_01mb_180days }}</span>
+                                <li>a dataset of 0.1 MB with a 6-month lifespan: <span class="price-in-trac">{{ pricing_01mb_180days }}</span>
                                     TRAC
-                                <li>A dataset of 1 MB with a 6-month lifespan: <span class="price-in-trac">{{ pricing_1mb_180days }}</span>
-                                    TRAC
-                                </li>
-                                <li>A dataset of 10 MB with a 6-month lifespan: <span class="price-in-trac">{{ pricing_10mb_180days }}</span>
+                                <li>a dataset of 1 MB with a 6-month lifespan: <span class="price-in-trac">{{ pricing_1mb_180days }}</span>
                                     TRAC
                                 </li>
-                                <li>A dataset of 10 MB with a 24-month lifespan: <span class="price-in-trac">{{ pricing_10mb_730days }}</span>
+                                <li>a dataset of 10 MB with a 6-month lifespan: <span class="price-in-trac">{{ pricing_10mb_180days }}</span>
+                                    TRAC
+                                </li>
+                                <li>a dataset of 10 MB with a 24-month lifespan: <span class="price-in-trac">{{ pricing_10mb_730days }}</span>
                                     TRAC
                                 </li>
                             </ul>
@@ -109,7 +109,7 @@
                                 </h3>
                                 <p class="label">Value</p>
                                 <el-input-number class="value-input" v-model="config.blockchain.dc_price_factor"
-                                                 @change="handleChangeDc" :min="0"></el-input-number>
+                                                 @change="handleChangeDc" :min="0" :precision="2" :step="0.1"></el-input-number>
                                 <div class="display-block text-left">
                                     <el-button type="primary" @click="onSubmit" class="houston-btn"
                                                :disabled="updateDcButton"
@@ -130,14 +130,18 @@
                         </el-col>
                         <el-col :span="12" class="text-left" style="padding-left: 20px;">
                             <h3 class="card-headline">
-                                The estimated amount of TRAC your node would require as a DH and a DC for jobs based on
-                                current Lambda:
+                                Lambda explained
                             </h3>
                             <p class="small-p">Since the ODN services market is open, each node is required to configure
                                 it’s own service price. The lambda factor is a user friendly way to setup the pricing
-                                configuration for your node data holder service. An overly optimistic Lambda (high cost)
+                                configuration for your node data holder service. </p>
+
+                            <h4 class="card-headline">
+                                How to set your Lambda
+                            </h4>
+                            <p class="small-p">Lambda approximates the complex factors for pricing (data lifespan, dataset size and token withdrawal cost ) on the network into one parameter. As each nodes set it's own Lambda factor, a market for DH nodes gets established around DH services where DC nodes need to publish datasets to the network with a Lambda value which a majority of the nodes on the network will accept. Therefore, an overly optimistic Lambda (high cost)
                                 could cause your node to be outpriced by other ODN nodes and not receive enough jobs to
-                                be profitable, while a Lambda set too low might mean an insufficient ROI.
+                                be profitable, while a Lambda set too low might mean an insufficient ROI. You can change the Lambda factor of your node at any time, which will effect all the jobs your node will try to engage in after the moment of Lambda change (previously agreed upon jobs will be uneffected).
                                 <br>The pricing formula (shown below), which utilizes Lambda, is designed to encompass:
                             </p>
                             <ul>
