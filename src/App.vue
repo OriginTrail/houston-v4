@@ -344,12 +344,12 @@
         setTimeout(() => {
           if (!this.$socket.connected) {
             this.$notify({
-              message: 'Connection with the node could not be established, please double check provided credentials',
+              message: 'Connection with the node could not be established, please double check provided credentials!',
               type: 'warning',
               duration: 4000
             });
           }
-        }, 1000);
+        }, 3000);
 
 
         window.EventBus.$emit('get-balances-event');

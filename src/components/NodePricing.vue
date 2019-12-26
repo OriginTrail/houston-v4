@@ -141,7 +141,7 @@
                             </h4>
                             <p class="small-p">Lambda approximates the complex factors for pricing (data lifespan, dataset size and token withdrawal cost ) on the network into one parameter. As each nodes set it's own Lambda factor, a market for DH nodes gets established around DH services where DC nodes need to publish datasets to the network with a Lambda value which a majority of the nodes on the network will accept. Therefore, an overly optimistic Lambda (high cost)
                                 could cause your node to be outpriced by other ODN nodes and not receive enough jobs to
-                                be profitable, while a Lambda set too low might mean an insufficient ROI. You can change the Lambda factor of your node at any time, which will effect all the jobs your node will try to engage in after the moment of Lambda change (previously agreed upon jobs will be uneffected).
+                                be profitable, while a Lambda set too low might mean an insufficient ROI. You can change the Lambda factor of your node at any time, which will affect all the jobs your node will try to engage in after the moment of Lambda change (previously agreed upon jobs will be unaffected).
                                 <br>The pricing formula (shown below), which utilizes Lambda, is designed to encompass:
                             </p>
                             <ul>
@@ -266,7 +266,10 @@ export default {
   },
   sockets: {
     updateComplete() {
-      console.log('updated');
+        this.$notify({
+            message: 'Successfully updated price factor!',
+            type: 'success'
+        });
     },
   },
   methods: {
