@@ -9,7 +9,7 @@
       content="ETH is required for your node to be able to publish transactions to the blockchain, which is handled by your node's operational wallet. This is mostly needed if you want to publish data sets on the network (as a DC node), but sometimes also required as a DH node. It is recommended to always have around 0.1 ETH on the node operational wallet.">
       <i class="el-icon-info" slot="reference"></i>
     </el-popover></h1>
-    <span style="margin-bottom: 30px">This will tranfer ETH to your operational wallet.</span>
+    <span style="margin-bottom: 30px">This will transfer ETH to your operational wallet.</span>
     <el-form :rules="rules" ref="formData" :model="formData">
       <el-form-item >
         <p class="label-p">Depositing From:</p>
@@ -86,6 +86,7 @@ export default {
 <style scoped>
   .block{
     display: block;
+    margin-top:118px;
   }
   .houston-btn{
     color: #ffffff;

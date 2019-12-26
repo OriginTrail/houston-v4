@@ -1,5 +1,5 @@
 <template>
-  <div class="panel">
+  <div class="panel deposit-trac">
     <h1>Deposit TRAC to Your Node<el-popover
       placement="top-start"
       title="Deposit TRAC"
@@ -82,7 +82,7 @@ export default {
   },
 };
 </script>
-<style>
+<style lang="scss">
   .block{
     display: block;
   }
@@ -137,5 +137,11 @@ export default {
     letter-spacing: normal;
     color: #131415;
     padding: 13px 15px;
+  }
+  .deposit-trac{
+    .houston-btn{
+      position: absolute;
+      bottom: 42px;
+    }
   }
 </style>
