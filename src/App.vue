@@ -2,7 +2,7 @@
     <div id="app">
         <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
             <el-menu-item index="0">
-                <img alt="OriginTrail" src="./assets/ot-dark_purple.svg" class="logo">  Houston v4
+                <img alt="OriginTrail" src="./assets/ot-dark_purple.svg" class="logo"> Houston v4
             </el-menu-item>
             <el-menu-item index="1" :disabled="!submitted">My Account</el-menu-item>
             <el-menu-item index="2" :disabled="!submitted">Node Profile</el-menu-item>
@@ -10,7 +10,7 @@
             <el-menu-item index="4" :disabled="!submitted">Pricing Configuration</el-menu-item>
             <el-menu-item index="5" :disabled="!submitted">Jobs/Offers</el-menu-item>
         </el-menu>
-        <el-container>
+        <el-container id="main-container">
             <el-container v-if="submitted && activeIndex2 === '1'">
                 <my-account :profile-storage-address="profile_storage_address"
                             :profile-address="profile_address"
@@ -25,7 +25,7 @@
             </el-container>
 
             <div v-else-if="submitted && activeIndex2 === '2'" class="token-management-wrapper">
-                <el-row >
+                <el-row>
                     <ManagementHeader></ManagementHeader>
                 </el-row>
                 <el-container>
@@ -161,7 +161,9 @@
                                             resize="none"
                                             v-model="management_wallet_input"></el-input>
                                 </el-form-item>
-                                <el-button class="landing-page-button" @click="submitIdentity" :disabled="selected_network === ''">Submit</el-button>
+                                <el-button class="landing-page-button" @click="submitIdentity"
+                                           :disabled="selected_network === ''">Submit
+                                </el-button>
                             </el-form>
                         </div>
                     </div>
@@ -172,186 +174,188 @@
 </template>
 
 <script>
-import Balances from './components/Balances.vue';
-import DepositEth from './components/DepositEth.vue';
-import DepositTokens from './components/DepositTokens.vue';
-import Withdraw from './components/Withdraw.vue';
-import ManageWallets from './components/ManageWallets.vue';
-import MyAccount from './components/MyAccount.vue';
-import NodePricing from './components/NodePricing.vue';
-import Jobs from './components/Jobs.vue';
-import NodeConfig from './components/NodeConfig.vue';
-import ManagementHeader from './components/TokenManagementHeader.vue';
-import Utilities from './Utilities';
+  import Balances from './components/Balances.vue';
+  import DepositEth from './components/DepositEth.vue';
+  import DepositTokens from './components/DepositTokens.vue';
+  import Withdraw from './components/Withdraw.vue';
+  import ManageWallets from './components/ManageWallets.vue';
+  import MyAccount from './components/MyAccount.vue';
+  import NodePricing from './components/NodePricing.vue';
+  import Jobs from './components/Jobs.vue';
+  import NodeConfig from './components/NodeConfig.vue';
+  import ManagementHeader from './components/TokenManagementHeader.vue';
+  import Utilities from './Utilities';
 
-/* eslint-disable */
+  /* eslint-disable */
 
-export default {
-  name: 'app',
-  data() {
-    return {
-      node_address: '',
-      activeIndex2: '/',
-      token_contract: '',
-      profile_address: '',
-      profile_storage_address: '',
-      submitted: 0,
-      loading_text: 'Transaction in progress. Please wait for transaction to finish.',
-      loading: false,
-      mobileTrue: false,
-      management_wallet_input: '',
-      erc_identity: '',
-      operational_wallet: '',
-      houston_pass: '',
-      rules: {
-        operational_wallet: [
-          {
-            required: true,
-            message: 'Please input your operational wallet',
-            trigger: 'blur',
-          },
-          {
-            max: 42,
-            message: 'Your wallet should not be more than 42 characters',
-          },
-          {
-            min: 42,
-            message: 'Your wallet should be at least 42 characters long',
-          },
-        ],
-        erc_identity: [
-          {
-            required: true,
-            message: 'Please input your ERC-Identity',
-            trigger: 'blur',
-          },
-          {
-            max: 42,
-            message: 'Your ERC-Identity should not be more than 42 characters',
-          },
-          {
-            min: 42,
-            message: 'Your ERC-Identity should be at least 42 characters long',
-          },
-        ],
-      },
-      showNodeProfile: false,
-      showMyAccount: false,
-      showNodeConfig: false,
-      showNodePricing: false,
-      showJobs: false,
-      configData: {},
-      systemData: {},
-      showConfig: false,
-      node_id: '',
-      network_options: [{
-        value: 'mainnet',
-        label: 'Mainnet',
-      }, {
-        value: 'testnet',
-        label: 'Testnet',
-      }],
-      selected_network: 'testnet',
-    };
-  },
-  mounted() {
-    if (localStorage.getItem('node_address') !== null) {
-      this.node_address = localStorage.getItem('node_address');
-    }
+  export default {
+    name: 'app',
+    data() {
+      return {
+        node_address: '',
+        activeIndex2: '/',
+        token_contract: '',
+        profile_address: '',
+        profile_storage_address: '',
+        submitted: 0,
+        loading_text: 'Transaction in progress. Please wait for transaction to finish.',
+        loading: false,
+        mobileTrue: false,
+        management_wallet_input: '',
+        erc_identity: '',
+        operational_wallet: '',
+        houston_pass: '',
+        rules: {
+          operational_wallet: [
+            {
+              required: true,
+              message: 'Please input your operational wallet',
+              trigger: 'blur',
+            },
+            {
+              max: 42,
+              message: 'Your wallet should not be more than 42 characters',
+            },
+            {
+              min: 42,
+              message: 'Your wallet should be at least 42 characters long',
+            },
+          ],
+          erc_identity: [
+            {
+              required: true,
+              message: 'Please input your ERC-Identity',
+              trigger: 'blur',
+            },
+            {
+              max: 42,
+              message: 'Your ERC-Identity should not be more than 42 characters',
+            },
+            {
+              min: 42,
+              message: 'Your ERC-Identity should be at least 42 characters long',
+            },
+          ],
+        },
+        showNodeProfile: false,
+        showMyAccount: false,
+        showNodeConfig: false,
+        showNodePricing: false,
+        showJobs: false,
+        configData: {},
+        systemData: {},
+        showConfig: false,
+        node_id: '',
+        network_options: [{
+          value: 'mainnet',
+          label: 'Mainnet',
+        }, {
+          value: 'testnet',
+          label: 'Testnet',
+        }],
+        selected_network: 'testnet',
+      };
+    },
+    mounted() {
+      this.calculateAppHeight();
 
-    if (localStorage.getItem('erc_identity') !== null) {
-      this.erc_identity = localStorage.getItem('erc_identity');
-    }
-
-    if (localStorage.getItem('houston_pass') !== null) {
-      this.houston_pass = localStorage.getItem('houston_pass');
-    }
-
-    if (localStorage.getItem('operational_wallet') !== null) {
-      this.operational_wallet = localStorage.getItem('operational_wallet');
-    }
-
-    if (localStorage.getItem('selected_network') !== null) {
-      this.selected_network = localStorage.getItem('selected_network');
-    }
-
-    window.EventBus.$on('loading', (msg) => {
-      this.loading = true;
-      this.loading_text = msg || 'Transaction in progress. Please wait for transaction to finish.';
-    });
-
-    window.EventBus.$on('loading-done', () => {
-      this.loading = false;
-    });
-    if (window.screen.width <= 770) {
-      this.mobileTrue = true;
-    }
-  },
-  methods: {
-    submitIdentity() {
-      localStorage.setItem('erc_identity', this.erc_identity);
-      localStorage.setItem('operational_wallet', this.operational_wallet);
-      localStorage.setItem('houston_pass', this.houston_pass);
-      localStorage.setItem('node_address', this.node_address);
-      localStorage.setItem('selected_network', this.selected_network);
-
-      if (this.selected_network === 'mainnet') {
-        Utilities.connectToMainnet();
-
-        window.hub.tokenAddress()
-          .then((result) => {
-            this.token_contract = result[0];
-          });
-
-        window.hub.getContractAddress('Profile')
-          .then((result) => {
-            this.profile_address = result[0];
-          });
-
-        window.hub.getContractAddress('ProfileStorage')
-          .then((result) => {
-            this.profile_storage_address = result[0];
-          });
-      } else {
-        Utilities.connectToTestnet();
-
-        window.hub.tokenAddress()
-          .then((result) => {
-            this.token_contract = result[0];
-          });
-
-        window.hub.getContractAddress('Profile')
-          .then((result) => {
-            this.profile_address = result[0];
-          });
-
-        window.hub.getContractAddress('ProfileStorage')
-          .then((result) => {
-            this.profile_storage_address = result[0];
-          });
+      if (localStorage.getItem('node_address') !== null) {
+        this.node_address = localStorage.getItem('node_address');
       }
 
-      this.submitted = 1;
-      this.activeIndex2 = '1';
+      if (localStorage.getItem('erc_identity') !== null) {
+        this.erc_identity = localStorage.getItem('erc_identity');
+      }
 
-      this.$socket.io.uri = `https://${this.node_address}:3000/?password=${this.houston_pass}`;
-      this.$socket.open();
+      if (localStorage.getItem('houston_pass') !== null) {
+        this.houston_pass = localStorage.getItem('houston_pass');
+      }
 
-      setTimeout(() => {
-          if(!this.$socket.connected) {
-              this.$notify({
-                  message: 'Connection with the node could not be established, please double check provided credentials',
-                  type: 'warning',
-                  duration: 4000
-              });
-          }
-      }, 1000);
+      if (localStorage.getItem('operational_wallet') !== null) {
+        this.operational_wallet = localStorage.getItem('operational_wallet');
+      }
 
+      if (localStorage.getItem('selected_network') !== null) {
+        this.selected_network = localStorage.getItem('selected_network');
+      }
 
-      window.EventBus.$emit('get-balances-event');
+      window.EventBus.$on('loading', (msg) => {
+        this.loading = true;
+        this.loading_text = msg || 'Transaction in progress. Please wait for transaction to finish.';
+      });
+
+      window.EventBus.$on('loading-done', () => {
+        this.loading = false;
+      });
+      if (window.screen.width <= 770) {
+        this.mobileTrue = true;
+      }
     },
-    handleSelect(key, keyPath) {
-      /* eslint-disable */
+    methods: {
+      submitIdentity() {
+        localStorage.setItem('erc_identity', this.erc_identity);
+        localStorage.setItem('operational_wallet', this.operational_wallet);
+        localStorage.setItem('houston_pass', this.houston_pass);
+        localStorage.setItem('node_address', this.node_address);
+        localStorage.setItem('selected_network', this.selected_network);
+
+        if (this.selected_network === 'mainnet') {
+          Utilities.connectToMainnet();
+
+          window.hub.tokenAddress()
+            .then((result) => {
+              this.token_contract = result[0];
+            });
+
+          window.hub.getContractAddress('Profile')
+            .then((result) => {
+              this.profile_address = result[0];
+            });
+
+          window.hub.getContractAddress('ProfileStorage')
+            .then((result) => {
+              this.profile_storage_address = result[0];
+            });
+        } else {
+          Utilities.connectToTestnet();
+
+          window.hub.tokenAddress()
+            .then((result) => {
+              this.token_contract = result[0];
+            });
+
+          window.hub.getContractAddress('Profile')
+            .then((result) => {
+              this.profile_address = result[0];
+            });
+
+          window.hub.getContractAddress('ProfileStorage')
+            .then((result) => {
+              this.profile_storage_address = result[0];
+            });
+        }
+
+        this.submitted = 1;
+        this.activeIndex2 = '1';
+
+        this.$socket.io.uri = `https://${this.node_address}:3000/?password=${this.houston_pass}`;
+        this.$socket.open();
+
+        setTimeout(() => {
+          if (!this.$socket.connected) {
+            this.$notify({
+              message: 'Connection with the node could not be established, please double check provided credentials',
+              type: 'warning',
+              duration: 4000
+            });
+          }
+        }, 1000);
+
+
+        window.EventBus.$emit('get-balances-event');
+      },
+      handleSelect(key, keyPath) {
+        /* eslint-disable */
         this.activeIndex2 = key;
         if (key == 1) {
           this.showMyAccount = true;
@@ -365,7 +369,9 @@ export default {
           this.showJobs = true;
         }
       },
+      calculateAppHeight() {
 
+      }
     },
     sockets: {
       connect() {
@@ -379,7 +385,7 @@ export default {
         this.node_id = val.identity;
         this.configData = val;
         this.showConfig = true;
-        window.EventBus.$emit('config',val);
+        window.EventBus.$emit('config', val);
         window.EventBus.$emit('node_id', this.node_id);
 
       },
@@ -397,25 +403,26 @@ export default {
         console.log(val, 'node info');
       },
 
-  },
-  components: {
-    Jobs,
-    NodePricing,
-    NodeConfig,
-    Balances,
-    DepositEth,
-    DepositTokens,
-    Withdraw,
-    ManageWallets,
-    MyAccount,
-    ManagementHeader,
-  },
-};
+    },
+    components: {
+      Jobs,
+      NodePricing,
+      NodeConfig,
+      Balances,
+      DepositEth,
+      DepositTokens,
+      Withdraw,
+      ManageWallets,
+      MyAccount,
+      ManagementHeader,
+    },
+  };
 </script>
 
 <style lang="scss">
 
     @import "./scss/landig-page";
+
     #app {
         font-family: 'Roboto', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -425,13 +432,13 @@ export default {
         padding-bottom: 230px;
     }
 
-    .el-menu--horizontal>.el-menu-item.is-active {
+    .el-menu--horizontal > .el-menu-item.is-active {
         border-bottom: 2px solid #1d2667;
         color: #303133;
         background-color: #f6f6f6;
     }
 
-    .el-menu-item:hover{
+    .el-menu-item:hover {
         background-color: #f6f6f6 !important;
     }
 
@@ -475,7 +482,8 @@ export default {
     .el-main {
         height: 100%;
     }
-    .token-management-wrapper{
+
+    .token-management-wrapper {
         width: 100%;
         padding: 0 70px 0 80px;
     }

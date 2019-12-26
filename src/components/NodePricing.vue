@@ -302,7 +302,7 @@ export default {
     handleChangeDc(value) {
       // this.pricing = calculatePrice(config.blockchain.trac_price_in_eth, config.blockchain.price_factor, 180, 1);
 
-      if (value == 0) {
+      if (value == -1) {
         this.updateDcButton = true;
       } else {
         this.updateDcButton = false;

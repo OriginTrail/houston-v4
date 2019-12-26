@@ -11,7 +11,7 @@
                     visible here.</h2>
             </el-col>
         </el-row>
-        <el-row>
+        <el-row class="info-wrapp">
             <el-col>
                 <el-tabs type="card" @tab-click="handleClick">
                     <el-tab-pane label="Holding Data">
@@ -598,5 +598,8 @@ export default {
         }
     }
 
+    .info-wrapp {
+        margin-bottom: 170px;
+    }
 
 </style>

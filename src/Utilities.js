@@ -74,7 +74,7 @@ export default {
   },
 
   connectToMainnet() {
-    window.hubAddress = '0x599C59081d9B673BBDdAfbc933B669aA84eA3eE1';
+    window.hubAddress = '0x89777F4D16F0a263F47EaD07cbCAb9497861aa79';
     // TODO: Get mainnet Keccak
     window.keccakAddress = '0x7e1bbcd25507a6fcb6503a5be75795848dca32b7';
 

@@ -6,7 +6,7 @@
                     <h1 class="margin-20 section-headline">Overview</h1>
                 </el-col>
             </el-row>
-            <el-row>
+            <el-row class="info-wrapp">
                 <el-col :span="12" class="padd-right">
                     <h3 class="margin-10 text-left small-headline">General</h3>
                     <div class="el-row special-row margin-30" >
@@ -702,5 +702,9 @@ export default {
 
     .margin-50 {
         margin-bottom: 50px;
+    }
+
+    .info-wrapp {
+        margin-bottom: 170px;
     }
 </style>
