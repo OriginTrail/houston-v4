@@ -349,10 +349,7 @@
               duration: 4000
             });
           }
-        }, 3000);
-
-
-        window.EventBus.$emit('get-balances-event');
+        }, 15000);
       },
       handleSelect(key, keyPath) {
         /* eslint-disable */
@@ -376,6 +373,7 @@
     sockets: {
       connect() {
         console.log('Socket connected. Checking for version!');
+        window.EventBus.$emit('get-balances-event');
         this.$socket.emit('get-balance');
         this.$socket.emit('get-balance');
         this.$socket.emit('get-node-info');
