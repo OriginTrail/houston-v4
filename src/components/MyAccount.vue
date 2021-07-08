@@ -210,13 +210,11 @@ export default {
     };
   },
   mounted() {
-
-    if (this.submitted) {
+    window.EventBus.$on('get-balances-event', () => {
       this.getAllBalances();
       this.$socket.emit('get-total-payouts');
       this.$socket.emit('get-profile');
-      console.log(this.systemData, 'pozvana u my account');
-    }
+    });
 
     this.network_type = window.network_type_constant;
 
