@@ -37,6 +37,7 @@ Vue.config.productionTip = false;
 Vue.use(DataTables);
 Vue.use(DataTablesServer);
 
+window.AppIsLoaded = false;
 
 new Vue({
   render: h => h(App),

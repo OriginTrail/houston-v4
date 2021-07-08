@@ -216,6 +216,12 @@ export default {
       this.$socket.emit('get-profile');
     });
 
+    if(window.AppIsLoaded) {
+      this.getAllBalances();
+      this.$socket.emit('get-total-payouts');
+      this.$socket.emit('get-profile');
+    }
+
     this.network_type = window.network_type_constant;
 
     window.EventBus.$on('system-data', (data) => {
