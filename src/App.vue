@@ -348,8 +348,9 @@
               type: 'warning',
               duration: 4000
             });
+            location.reload();
           }
-        }, 15000);
+        }, 30000);
       },
       handleSelect(key, keyPath) {
         /* eslint-disable */
@@ -373,6 +374,7 @@
     sockets: {
       connect() {
         console.log('Socket connected. Checking for version!');
+        window.AppIsLoaded = true;
         window.EventBus.$emit('get-balances-event');
         this.$socket.emit('get-balance');
         this.$socket.emit('get-balance');
